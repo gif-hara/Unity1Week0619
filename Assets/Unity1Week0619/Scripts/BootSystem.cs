@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Unity1Week0619.Scripts.GameSystems;
 using Unity1Week0619.UISystems;
 using UnityEngine;
 
@@ -30,6 +31,10 @@ namespace Unity1Week0619
 
         private static UniTask SetupMessageBrokerAsync()
         {
+            MessageBroker.Setup(builder =>
+            {
+                GameEvents.RegisterEvents(builder);
+            });
             return UniTask.CompletedTask;
         }
     }
