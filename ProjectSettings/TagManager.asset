@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Deadline
   layers:
   - Default
   - TransparentFX
@@ -11,10 +12,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Sacabambaspis/SoftBody
+  - Sacabambaspis/Trigger
+  - Deadline
   - 
   - 
   - 
