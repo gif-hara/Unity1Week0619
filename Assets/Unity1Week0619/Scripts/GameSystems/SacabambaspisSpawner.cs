@@ -8,6 +8,9 @@ namespace Unity1Week0619.GameSystems
     public class SacabambaspisSpawner : MonoBehaviour
     {
         [SerializeField]
+        private Transform parent;
+
+        [SerializeField]
         private GameObject sacabambaspisPrefab;
 
         [SerializeField]
@@ -20,7 +23,7 @@ namespace Unity1Week0619.GameSystems
         {
             Gizmos.color = Color.red;
             var center = this.transform.localPosition + new Vector3(spawnArea.center.x, spawnArea.center.y, 0f);
-            Gizmos.DrawWireCube( center, spawnArea.size);
+            Gizmos.DrawWireCube(center, spawnArea.size);
         }
 
         public void BeginSpawn(CancellationToken cancellationToken)
@@ -33,7 +36,7 @@ namespace Unity1Week0619.GameSystems
                         var position = this.transform.localPosition;
                         position.x += UnityEngine.Random.Range(spawnArea.xMin, spawnArea.xMax);
                         position.y += UnityEngine.Random.Range(spawnArea.yMin, spawnArea.yMax);
-                        Instantiate(sacabambaspisPrefab, position, Quaternion.identity);
+                        Instantiate(sacabambaspisPrefab, position, Quaternion.identity, this.parent);
                     }
                 },
                 cancellationToken);
