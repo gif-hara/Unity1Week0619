@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using Unity1Week0619.UISystems;
+using Unity1Week0619.UISystems.Presenters;
 using UnityEngine;
 
 namespace Unity1Week0619.GameSystems
@@ -11,10 +13,18 @@ namespace Unity1Week0619.GameSystems
         [SerializeField]
         private SacabambaspisSpawner sacabambaspisSpawner;
 
-        void Start()
+        [SerializeField]
+        private GameUIView gameUIView;
+
+        async void Start()
         {
+            await BootSystem.IsReady;
+
             var ct = this.GetCancellationTokenOnDestroy();
             this.sacabambaspisSpawner.BeginSpawn(ct);
+
+            var gameUIPresenter = new GameUIPresenter(this.gameUIView);
+            gameUIPresenter.SetSacabambaspisCount(0);
         }
     }
 }
