@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using MessagePipe;
 using Unity1Week0619.Scripts.GameSystems;
 using UnityEngine;
 
@@ -12,7 +14,10 @@ namespace Unity1Week0619.GameSystems
         private Transform parent;
 
         [SerializeField]
-        private GameObject sacabambaspisPrefab;
+        private List<SacabambaspisController> normalSacabambaspisControllerPrefabs;
+        
+        [SerializeField]
+        private List<SacabambaspisController> colorfulSacabambaspisControllerPrefabs;
 
         /// <summary>
         /// 最初に生成する座標を持つオブジェクト
@@ -22,7 +27,7 @@ namespace Unity1Week0619.GameSystems
         
         [SerializeField]
         private Rect spawnArea;
-
+        
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
@@ -32,6 +37,15 @@ namespace Unity1Week0619.GameSystems
 
         public void BeginSpawn(GameDesignData gameDesignData, CancellationToken cancellationToken)
         {
+            var isFullBaspisMode = false;
+            
+            MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
+                .Subscribe(_ => isFullBaspisMode = true)
+                .AddTo(cancellationToken);
+            MessageBroker.GetSubscriber<GameEvents.EndFullBaspisMode>()
+                .Subscribe(_ => isFullBaspisMode = false)
+                .AddTo(cancellationToken);
+            
             UniTask.Void(async _ =>
                 {
                     var spawnCount = 0;
@@ -42,7 +56,7 @@ namespace Unity1Week0619.GameSystems
                         await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), cancellationToken: cancellationToken);
                         
                         var position = this.GetSpawnPosition(spawnCount);
-                        Instantiate(sacabambaspisPrefab, position, Quaternion.identity, this.parent);
+                        Instantiate(GetSacabambaspisControllerPrefab(isFullBaspisMode), position, Quaternion.identity, this.parent);
                         spawnCount++;
                     }
                 },
@@ -65,6 +79,16 @@ namespace Unity1Week0619.GameSystems
             position.x += UnityEngine.Random.Range(spawnArea.xMin, spawnArea.xMax);
             position.y += UnityEngine.Random.Range(spawnArea.yMin, spawnArea.yMax);
             return position;
+        }
+        
+        /// <summary>
+        /// 生成するサカバンバスピスを返す
+        /// </summary>
+        private SacabambaspisController GetSacabambaspisControllerPrefab(bool isFullBaspisMode)
+        {
+            var list = isFullBaspisMode ? this.colorfulSacabambaspisControllerPrefabs : this.normalSacabambaspisControllerPrefabs;
+            var index = UnityEngine.Random.Range(0, list.Count);
+            return list[index];
         }
     }
 }
