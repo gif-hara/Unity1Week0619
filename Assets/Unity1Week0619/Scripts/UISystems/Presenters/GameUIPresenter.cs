@@ -24,6 +24,7 @@ namespace Unity1Week0619.UISystems.Presenters
                 {
                     // ローカライズは必要になったらする
                     view.SacabambaspisCount.CountText.text = $"{x}バスピス！";
+                    view.SacabambaspisCount.AnimationController.Play(view.SacabambaspisCount.UpdateAnimationClip);
                 })
                 .AddTo(cancellationToken);
             baspisGauge

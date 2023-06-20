@@ -17,7 +17,17 @@ namespace Unity1Week0619.UISystems
             [SerializeField]
             private TMP_Text countText;
 
+            [SerializeField]
+            private AnimationController animationController;
+
+            [SerializeField]
+            private AnimationClip updateAnimationClip;
+
             public TMP_Text CountText => countText;
+
+            public AnimationController AnimationController => animationController;
+
+            public AnimationClip UpdateAnimationClip => updateAnimationClip;
         }
 
         /// <summary>
