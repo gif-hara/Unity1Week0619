@@ -13,6 +13,9 @@ namespace Unity1Week0619.GameSystems
     public class GameSceneController : MonoBehaviour
     {
         [SerializeField]
+        private GameDesignData gameDesignData;
+        
+        [SerializeField]
         private SacabambaspisSpawner sacabambaspisSpawner;
 
         [SerializeField]
@@ -28,17 +31,19 @@ namespace Unity1Week0619.GameSystems
             var gameUIPresenter = new GameUIPresenter(this.gameUIView);
             gameUIPresenter.SetSacabambaspisCount(0);
 
-            var sacabambaspisCount = 0;
+            var score = 0;
             MessageBroker.GetSubscriber<GameEvents.OnEnterSacabambaspis>()
-                .Subscribe(_ =>
+                .Subscribe(x =>
                 {
-                    gameUIPresenter.SetSacabambaspisCount(++sacabambaspisCount);
+                    score += this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                    gameUIPresenter.SetSacabambaspisCount(score);
                 })
                 .AddTo(ct);
             MessageBroker.GetSubscriber<GameEvents.OnExitSacabambaspis>()
-                .Subscribe(_ =>
+                .Subscribe(x =>
                 {
-                    gameUIPresenter.SetSacabambaspisCount(--sacabambaspisCount);
+                    score -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                    gameUIPresenter.SetSacabambaspisCount(score);
                 })
                 .AddTo(ct);
         }

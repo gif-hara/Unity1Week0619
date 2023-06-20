@@ -12,6 +12,9 @@ namespace Unity1Week0619
     public class SacabambaspisController : MonoBehaviour
     {
         [SerializeField]
+        private Define.SacabambaspisType sacabambaspisType;
+        
+        [SerializeField]
         private Rigidbody2D targetRigidbody2D;
         
         [SerializeField]
@@ -49,7 +52,7 @@ namespace Unity1Week0619
                 {
                     this.isEnterPlayer = true;
                     MessageBroker.GetPublisher<GameEvents.OnEnterSacabambaspis>()
-                        .Publish(GameEvents.OnEnterSacabambaspis.Get());
+                        .Publish(GameEvents.OnEnterSacabambaspis.Get(this.sacabambaspisType));
 
                 }
                 // 他のサカバンバスピスに接触した場合はプレイヤーの中に入っているかを確認する
@@ -61,7 +64,7 @@ namespace Unity1Week0619
                     {
                         this.isEnterPlayer = true;
                         MessageBroker.GetPublisher<GameEvents.OnEnterSacabambaspis>()
-                            .Publish(GameEvents.OnEnterSacabambaspis.Get());
+                            .Publish(GameEvents.OnEnterSacabambaspis.Get(this.sacabambaspisType));
                     }
                 }
             }
@@ -73,7 +76,7 @@ namespace Unity1Week0619
                     if (this.isEnterPlayer)
                     {
                         MessageBroker.GetPublisher<GameEvents.OnExitSacabambaspis>()
-                            .Publish(GameEvents.OnExitSacabambaspis.Get());
+                            .Publish(GameEvents.OnExitSacabambaspis.Get(this.sacabambaspisType));
                     }
                 }
             }
