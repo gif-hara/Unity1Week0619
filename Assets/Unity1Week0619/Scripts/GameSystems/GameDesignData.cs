@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Unity1Week0619.Scripts.GameSystems
@@ -10,18 +11,29 @@ namespace Unity1Week0619.Scripts.GameSystems
         /// 通常のサカバンバスピスに関するデータ
         /// </summary>
         [SerializeField]
-        private SacabambaspisData normalSacabambaspisData;
+        private SacabambaspisData_ normalSacabambaspisData;
         
         /// <summary>
         /// 色付きのサカバンバスピスに関するデータ
         /// </summary>
         [SerializeField]
-        private SacabambaspisData colorfulSacabambaspisData;
+        private SacabambaspisData_ colorfulSacabambaspisData;
         
         /// <summary>
-        /// <paramref name="sacabambaspisType"/>から<see cref="SacabambaspisData"/>を返す
+        /// レベルに関するデータ
         /// </summary>
-        public SacabambaspisData GetSacabambaspisData(Define.SacabambaspisType sacabambaspisType)
+        [SerializeField]
+        private LevelData_ levelData;
+        
+        /// <summary>
+        /// <inheritdoc cref="levelData"/>
+        /// </summary>
+        public LevelData_ LevelData => this.levelData;
+        
+        /// <summary>
+        /// <paramref name="sacabambaspisType"/>から<see cref="SacabambaspisData_"/>を返す
+        /// </summary>
+        public SacabambaspisData_ GetSacabambaspisData(Define.SacabambaspisType sacabambaspisType)
         {
             switch (sacabambaspisType)
             {
@@ -38,7 +50,7 @@ namespace Unity1Week0619.Scripts.GameSystems
         /// サカバンバスピスに関するデータ
         /// </summary>
         [Serializable]
-        public class SacabambaspisData
+        public class SacabambaspisData_
         {
             /// <summary>
             /// 加減算されるスコア
@@ -72,6 +84,34 @@ namespace Unity1Week0619.Scripts.GameSystems
             /// <inheritdoc cref="onExitBaspisGauge"/>
             /// </summary>
             public float OnExitBaspisGauge => this.onExitBaspisGauge;
+        }
+
+        /// <summary>
+        /// レベルに関するデータ
+        /// </summary>
+        [Serializable]
+        public class LevelData_
+        {
+            /// <summary>
+            /// 生成する間隔（秒）
+            /// </summary>
+            [SerializeField]
+            private List<float> spawnIntervalSeconds;
+            
+            /// <summary>
+            /// レベルから生成する間隔秒数を返す
+            /// </summary>
+            public float GetSpawnIntervalSeconds(int level)
+            {
+                // インデックスは最大値を超えないように
+                var index = level;
+                if (index >= this.spawnIntervalSeconds.Count)
+                {
+                    index = this.spawnIntervalSeconds.Count - 1;
+                }
+
+                return this.spawnIntervalSeconds[index];
+            }
         }
     }
 }

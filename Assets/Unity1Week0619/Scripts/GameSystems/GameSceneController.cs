@@ -26,7 +26,7 @@ namespace Unity1Week0619.GameSystems
             await BootSystem.IsReady;
 
             var ct = this.GetCancellationTokenOnDestroy();
-            this.sacabambaspisSpawner.BeginSpawn(ct);
+            this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, ct);
 
             var gameUIPresenter = new GameUIPresenter(this.gameUIView);
             gameUIPresenter.SetSacabambaspisCount(0);

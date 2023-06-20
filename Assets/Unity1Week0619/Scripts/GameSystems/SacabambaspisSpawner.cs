@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Unity1Week0619.Scripts.GameSystems;
 using UnityEngine;
 
 namespace Unity1Week0619.GameSystems
@@ -32,14 +33,16 @@ namespace Unity1Week0619.GameSystems
             Gizmos.DrawWireCube(center, spawnArea.size);
         }
 
-        public void BeginSpawn(CancellationToken cancellationToken)
+        public void BeginSpawn(GameDesignData gameDesignData, CancellationToken cancellationToken)
         {
             UniTask.Void(async _ =>
                 {
                     var spawnCount = 0;
+                    var level = 0;
                     while (true)
                     {
-                        await UniTask.Delay(TimeSpan.FromSeconds(spawnInterval), cancellationToken: cancellationToken);
+                        var delaySeconds = gameDesignData.LevelData.GetSpawnIntervalSeconds(level);
+                        await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), cancellationToken: cancellationToken);
                         
                         var position = this.GetSpawnPosition(spawnCount);
                         Instantiate(sacabambaspisPrefab, position, Quaternion.identity, this.parent);
