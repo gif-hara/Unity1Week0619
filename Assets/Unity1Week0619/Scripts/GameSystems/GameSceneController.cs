@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Cysharp.Threading.Tasks.Triggers;
@@ -29,7 +30,7 @@ namespace Unity1Week0619.GameSystems
             await BootSystem.IsReady;
 
             // ゲームシステム初期化
-            var cancellationToken = this.GetCancellationTokenOnDestroy();
+            var gameSceneToken = this.GetCancellationTokenOnDestroy();
             var score = new AsyncReactiveProperty<int>(0);
             var baspisGauge = new AsyncReactiveProperty<float>(this.gameDesignData.BaspisGaugeData.InitialAmount);
             var fullBaspisModeGauge = new AsyncReactiveProperty<float>(0.0f);
@@ -39,7 +40,7 @@ namespace Unity1Week0619.GameSystems
                 score,
                 baspisGauge,
                 fullBaspisModeGauge,
-                cancellationToken
+                gameSceneToken
                 );
             
             // サカバンバスピスがプレイヤーに入った際の処理
@@ -78,7 +79,7 @@ namespace Unity1Week0619.GameSystems
                             });
                     }
                 })
-                .AddTo(cancellationToken);
+                .AddTo(gameSceneToken);
             
             // サカバンバスピスが離れた際の処理
             MessageBroker.GetSubscriber<GameEvents.OnExitSacabambaspis>()
@@ -94,7 +95,7 @@ namespace Unity1Week0619.GameSystems
                         baspisGauge.Value = Mathf.Clamp01(baspisGauge.Value - this.gameDesignData.BaspisGaugeData.OnExitAmount);
                     }
                 })
-                .AddTo(cancellationToken);
+                .AddTo(gameSceneToken);
             
             // ゲーム終了時の処理
             MessageBroker.GetAsyncSubscriber<GameEvents.TakeUntilEndGame>()
@@ -104,21 +105,24 @@ namespace Unity1Week0619.GameSystems
                         .Where(x => x <= 0.0f)
                         .FirstAsync(ct);
                 })
-                .AddTo(cancellationToken);
+                .AddTo(gameSceneToken);
 
             // ゲームを開始する
             await MessageBroker.GetAsyncPublisher<GameEvents.BeginGame>()
-                .PublishAsync(GameEvents.BeginGame.Get(), cancellationToken);
-            
-            this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, cancellationToken);
+                .PublishAsync(GameEvents.BeginGame.Get(), gameSceneToken);
+
+            var inGameTokenSource = new CancellationTokenSource();
+            this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, inGameTokenSource.Token);
             
             // ゲームが終了するまで待機
             await MessageBroker.GetAsyncPublisher<GameEvents.TakeUntilEndGame>()
-                .PublishAsync(GameEvents.TakeUntilEndGame.Get(), cancellationToken);
+                .PublishAsync(GameEvents.TakeUntilEndGame.Get(), gameSceneToken);
+            
+            inGameTokenSource.Dispose();
             
             // ゲーム終了
             await MessageBroker.GetAsyncPublisher<GameEvents.EndGame>()
-                .PublishAsync(GameEvents.EndGame.Get(), cancellationToken);
+                .PublishAsync(GameEvents.EndGame.Get(), gameSceneToken);
         }
     }
 }
