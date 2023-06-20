@@ -21,21 +21,27 @@ MonoBehaviour:
       pitchMin: 1
       pitchMax: 1
     appearanceAudioDataList:
-    - clip: {fileID: 8300000, guid: 4c35c18871ee22a4abff5dc43993024e, type: 3}
-      volumeMin: 1
-      volumeMax: 1
-      pitchMin: 1
-      pitchMax: 2
-    - clip: {fileID: 8300000, guid: db0d511a6af944743b50398ab2a1ebf8, type: 3}
-      volumeMin: 1
-      volumeMax: 1
-      pitchMin: 1
-      pitchMax: 2
-    - clip: {fileID: 8300000, guid: baf7c7d56aafb0149bd3c1a0e0bb5bc0, type: 3}
-      volumeMin: 1
-      volumeMax: 1
-      pitchMin: 1
-      pitchMax: 2
+    - audioData:
+        clip: {fileID: 8300000, guid: 4c35c18871ee22a4abff5dc43993024e, type: 3}
+        volumeMin: 1
+        volumeMax: 1
+        pitchMin: 1
+        pitchMax: 2
+      serif: "\u52A9\u3051\u3066\u30FC\uFF01"
+    - audioData:
+        clip: {fileID: 8300000, guid: db0d511a6af944743b50398ab2a1ebf8, type: 3}
+        volumeMin: 1
+        volumeMax: 1
+        pitchMin: 1
+        pitchMax: 2
+      serif: "\u3084\u3063\u3075\u30FC\uFF01"
+    - audioData:
+        clip: {fileID: 8300000, guid: baf7c7d56aafb0149bd3c1a0e0bb5bc0, type: 3}
+        volumeMin: 1
+        volumeMax: 1
+        pitchMin: 1
+        pitchMax: 2
+      serif: "\u3053\u3093\u306B\u3061\u308F\u30FC"
     onEnterAudioDataList:
     - clip: {fileID: 8300000, guid: 6bdc1f537ce60fb4d8b7b80107a857ba, type: 3}
       volumeMin: 1
@@ -77,21 +83,27 @@ MonoBehaviour:
       pitchMin: 1
       pitchMax: 1
     appearanceAudioDataList:
-    - clip: {fileID: 8300000, guid: 4c35c18871ee22a4abff5dc43993024e, type: 3}
-      volumeMin: 1
-      volumeMax: 1
-      pitchMin: 1
-      pitchMax: 2
-    - clip: {fileID: 8300000, guid: db0d511a6af944743b50398ab2a1ebf8, type: 3}
-      volumeMin: 1
-      volumeMax: 1
-      pitchMin: 1
-      pitchMax: 2
-    - clip: {fileID: 8300000, guid: baf7c7d56aafb0149bd3c1a0e0bb5bc0, type: 3}
-      volumeMin: 1
-      volumeMax: 1
-      pitchMin: 1
-      pitchMax: 2
+    - audioData:
+        clip: {fileID: 0}
+        volumeMin: 1
+        volumeMax: 1
+        pitchMin: 1
+        pitchMax: 1
+      serif: 
+    - audioData:
+        clip: {fileID: 0}
+        volumeMin: 1
+        volumeMax: 1
+        pitchMin: 1
+        pitchMax: 1
+      serif: 
+    - audioData:
+        clip: {fileID: 0}
+        volumeMin: 1
+        volumeMax: 1
+        pitchMin: 1
+        pitchMax: 1
+      serif: 
     onEnterAudioDataList:
     - clip: {fileID: 8300000, guid: 6bdc1f537ce60fb4d8b7b80107a857ba, type: 3}
       volumeMin: 1

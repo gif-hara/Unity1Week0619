@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 namespace Unity1Week0619.GameSystems
@@ -74,6 +75,19 @@ namespace Unity1Week0619.GameSystems
         [Serializable]
         public class SacabambaspisData_
         {
+            [Serializable]
+            public class AppearanceAudioData
+            {
+                [SerializeField]
+                private SoundEffectElement.AudioData audioData;
+
+                [SerializeField]
+                private string serif;
+
+                public SoundEffectElement.AudioData AudioData => this.audioData;
+
+                public string Serif => this.serif;
+            }
             /// <summary>
             /// 加減算されるスコア
             /// </summary>
@@ -90,7 +104,7 @@ namespace Unity1Week0619.GameSystems
             /// 登場した時に再生されるサウンドデータリスト
             /// </summary>
             [SerializeField]
-            private List<SoundEffectElement.AudioData> appearanceAudioDataList;
+            private List<AppearanceAudioData> appearanceAudioDataList;
 
             /// <summary>
             /// キャッチされた時に再生されるサウンドデータリスト
@@ -126,7 +140,7 @@ namespace Unity1Week0619.GameSystems
 
             public List<SoundEffectElement.AudioData> SpawnAudioDataList => this.spawnAudioDataList;
 
-            public List<SoundEffectElement.AudioData> AppearanceAudioDataList => this.appearanceAudioDataList;
+            public List<AppearanceAudioData> AppearanceAudioDataList => this.appearanceAudioDataList;
 
             public List<SoundEffectElement.AudioData> OnEnterAudioDataList => this.onEnterAudioDataList;
 

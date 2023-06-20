@@ -24,6 +24,9 @@ namespace Unity1Week0619.GameSystems
         [SerializeField]
         private GameObject onEnterEffectPrefab;
 
+        [SerializeField]
+        private SpeechBalloonController speechBalloonController;
+
         /// <summary>
         /// プレイヤーの中に入ったか
         /// </summary>
@@ -50,7 +53,9 @@ namespace Unity1Week0619.GameSystems
             this.targetRigidbody2D.AddTorque(
                 UnityEngine.Random.Range(sacabambaspisData.SpawnAddTorqueMin, sacabambaspisData.SpawnAddTorqueMax)
                 );
-            PlaySE(gameDesignData.GetSacabambaspisData(this.sacabambaspisType).AppearanceAudioDataList);
+            var appearanceAudioData = sacabambaspisData.AppearanceAudioDataList[UnityEngine.Random.Range(0, sacabambaspisData.AppearanceAudioDataList.Count)];
+            AudioManager.PlaySE(appearanceAudioData.AudioData);
+            this.speechBalloonController.PlayAnimation(appearanceAudioData.Serif);
 
             this.GetAsyncTriggerEnter2DTrigger()
                 .Subscribe(other =>
@@ -101,7 +106,7 @@ namespace Unity1Week0619.GameSystems
                 .Publish(GameEvents.OnEnterSacabambaspis.Get(this.sacabambaspisType));
         }
 
-        private static void PlaySE(List<SoundEffectElement.AudioData> dataList)
+        private static void PlaySE(IReadOnlyList<SoundEffectElement.AudioData> dataList)
         {
             if(dataList.Count <= 0)
             {
