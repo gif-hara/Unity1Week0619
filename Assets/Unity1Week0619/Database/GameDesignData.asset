@@ -126,11 +126,11 @@ MonoBehaviour:
     spawnAddTorqueMax: 800
   levelData:
     spawnIntervalSeconds:
+    - 2
     - 1
     - 0.8
     - 0.6
-    - 0.4
-    - 0.2
+    - 0.3
   baspisGaugeData:
     initialAmount: 0.3
     onEnterAmount: 0.05

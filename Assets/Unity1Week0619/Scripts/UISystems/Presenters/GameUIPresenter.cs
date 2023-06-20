@@ -17,7 +17,8 @@ namespace Unity1Week0619.UISystems.Presenters
             )
         {
             var view = UIManager.Open(viewPrefab);
-            
+            view.Message.SetActive(false);
+
             score
                 .Subscribe(x =>
                 {
@@ -42,15 +43,15 @@ namespace Unity1Week0619.UISystems.Presenters
             MessageBroker.GetAsyncSubscriber<GameEvents.BeginGame>()
                 .Subscribe(async (_, ct) =>
                 {
-                    await view.GameStartMessage.ShowAsync();
+                    await view.Message.ShowAsync("スタート！");
                 })
                 .AddTo(cancellationToken);
-            
+
             // ゲーム終了時にメッセージを出す
             MessageBroker.GetAsyncSubscriber<GameEvents.EndGame>()
                 .Subscribe(async (_, ct) =>
                 {
-                    await view.GameEndMessage.ShowAsync();
+                    await view.Message.ShowAsync("終了！");
                 })
                 .AddTo(cancellationToken);
         }

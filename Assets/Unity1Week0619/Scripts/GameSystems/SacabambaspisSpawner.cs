@@ -36,19 +36,23 @@ namespace Unity1Week0619.GameSystems
 
         public void BeginSpawn(GameDesignData gameDesignData, CancellationToken cancellationToken)
         {
-            var isFullBaspisMode = false;
-
-            MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
-                .Subscribe(_ => isFullBaspisMode = true)
-                .AddTo(cancellationToken);
-            MessageBroker.GetSubscriber<GameEvents.EndFullBaspisMode>()
-                .Subscribe(_ => isFullBaspisMode = false)
-                .AddTo(cancellationToken);
-
             UniTask.Void(async _ =>
                 {
-                    var spawnCount = 0;
+                    var isFullBaspisMode = false;
                     var level = 0;
+
+                    MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
+                        .Subscribe(_ =>
+                        {
+                            level++;
+                            isFullBaspisMode = true;
+                        })
+                        .AddTo(cancellationToken);
+                    MessageBroker.GetSubscriber<GameEvents.EndFullBaspisMode>()
+                        .Subscribe(_ => isFullBaspisMode = false)
+                        .AddTo(cancellationToken);
+
+                    var spawnCount = 0;
                     while (true)
                     {
                         var delaySeconds = gameDesignData.LevelData.GetSpawnIntervalSeconds(level);

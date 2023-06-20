@@ -14,7 +14,7 @@ namespace Unity1Week0619
             this.audioSource.volume = UnityEngine.Random.Range(data.volumeMin, data.volumeMax);
             this.audioSource.pitch = UnityEngine.Random.Range(data.pitchMin, data.pitchMax);
             this.audioSource.PlayOneShot(data.clip);
-            return UniTask.WaitUntil(() => !this.audioSource.isPlaying);
+            return UniTask.WaitUntil(() => !this.audioSource.isPlaying, cancellationToken:this.GetCancellationTokenOnDestroy());
         }
 
         public void Play(AudioData data)

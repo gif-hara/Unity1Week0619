@@ -28,10 +28,10 @@ namespace Unity1Week0619.UISystems
         {
             [SerializeField]
             private Slider gauge;
-            
+
             public Slider Gauge => gauge;
         }
-        
+
         /// <summary>
         /// フルバスピスモードのエリア
         /// </summary>
@@ -40,7 +40,7 @@ namespace Unity1Week0619.UISystems
         {
             [SerializeField]
             private Slider gauge;
-            
+
             public Slider Gauge => gauge;
         }
 
@@ -52,41 +52,48 @@ namespace Unity1Week0619.UISystems
         {
             [SerializeField]
             private GameObject root;
-            
+
             [SerializeField]
-            private float delaySeconds;
-            
-            public async UniTask ShowAsync()
+            private TMP_Text text;
+
+            [SerializeField]
+            private AnimationController animationController;
+
+            [SerializeField]
+            private AnimationClip showAnimationClip;
+
+            public async UniTask ShowAsync(string message)
             {
+                this.text.text = message;
                 this.root.SetActive(true);
-                await UniTask.Delay(TimeSpan.FromSeconds(this.delaySeconds));
+                await this.animationController.PlayAsync(this.showAnimationClip);
                 this.root.SetActive(false);
+            }
+
+            public void SetActive(bool isActive)
+            {
+                this.root.SetActive(isActive);
             }
         }
 
         [SerializeField]
         private SacabambaspisCountArea sacabambaspisCountArea;
-        
+
         [SerializeField]
         private BaspisGaugeArea baspisGaugeArea;
-        
+
         [SerializeField]
         private FullBaspisModeArea fullBaspisModeArea;
 
         [SerializeField]
-        private MessageArea gameStartMessageArea;
-        
-        [SerializeField]
-        private MessageArea gameEndMessageArea;
+        private MessageArea messageArea;
 
         public SacabambaspisCountArea SacabambaspisCount => sacabambaspisCountArea;
-        
+
         public BaspisGaugeArea BaspisGauge => baspisGaugeArea;
-        
+
         public FullBaspisModeArea FullBaspisMode => fullBaspisModeArea;
-        
-        public MessageArea GameStartMessage => gameStartMessageArea;
-        
-        public MessageArea GameEndMessage => gameEndMessageArea;
+
+        public MessageArea Message => messageArea;
     }
 }
