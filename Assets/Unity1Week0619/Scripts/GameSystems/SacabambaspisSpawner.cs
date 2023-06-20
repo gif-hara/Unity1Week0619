@@ -14,7 +14,7 @@ namespace Unity1Week0619.GameSystems
 
         [SerializeField]
         private List<SacabambaspisController> normalSacabambaspisControllerPrefabs;
-        
+
         [SerializeField]
         private List<SacabambaspisController> colorfulSacabambaspisControllerPrefabs;
 
@@ -23,10 +23,10 @@ namespace Unity1Week0619.GameSystems
         /// </summary>
         [SerializeField]
         private Transform firstSpawnPoint;
-        
+
         [SerializeField]
         private Rect spawnArea;
-        
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
@@ -37,14 +37,14 @@ namespace Unity1Week0619.GameSystems
         public void BeginSpawn(GameDesignData gameDesignData, CancellationToken cancellationToken)
         {
             var isFullBaspisMode = false;
-            
+
             MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
                 .Subscribe(_ => isFullBaspisMode = true)
                 .AddTo(cancellationToken);
             MessageBroker.GetSubscriber<GameEvents.EndFullBaspisMode>()
                 .Subscribe(_ => isFullBaspisMode = false)
                 .AddTo(cancellationToken);
-            
+
             UniTask.Void(async _ =>
                 {
                     var spawnCount = 0;
@@ -53,7 +53,13 @@ namespace Unity1Week0619.GameSystems
                     {
                         var delaySeconds = gameDesignData.LevelData.GetSpawnIntervalSeconds(level);
                         await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), cancellationToken: cancellationToken);
-                        
+
+                        // すでにキャンセルされていたら何もしない
+                        if (cancellationToken.IsCancellationRequested)
+                        {
+                            return;
+                        }
+
                         var position = this.GetSpawnPosition(spawnCount);
                         Instantiate(GetSacabambaspisControllerPrefab(isFullBaspisMode), position, Quaternion.identity, this.parent);
                         spawnCount++;
@@ -61,7 +67,7 @@ namespace Unity1Week0619.GameSystems
                 },
                 cancellationToken);
         }
-        
+
         /// <summary>
         /// 生成する座標を返す
         /// </summary>
@@ -72,14 +78,14 @@ namespace Unity1Week0619.GameSystems
             {
                 return this.firstSpawnPoint.position;
             }
-            
+
             // それ以外はランダムな座標を返す
             var position = this.transform.localPosition;
             position.x += UnityEngine.Random.Range(spawnArea.xMin, spawnArea.xMax);
             position.y += UnityEngine.Random.Range(spawnArea.yMin, spawnArea.yMax);
             return position;
         }
-        
+
         /// <summary>
         /// 生成するサカバンバスピスを返す
         /// </summary>
