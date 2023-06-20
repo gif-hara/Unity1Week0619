@@ -19,10 +19,7 @@ namespace Unity1Week0619.GameSystems
         /// </summary>
         [SerializeField]
         private Transform firstSpawnPoint;
-
-        [SerializeField]
-        private float spawnInterval;
-
+        
         [SerializeField]
         private Rect spawnArea;
 
