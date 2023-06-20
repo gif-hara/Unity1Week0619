@@ -52,20 +52,21 @@ namespace Unity1Week0619
                 {
                     if (other.attachedRigidbody != null)
                     {
-                        // プレイヤーと接触した場合はプレイヤーの中に入ったとみなす
-                        if (!this.isEnterPlayer && other.attachedRigidbody.GetComponent<PlayerController>() != null)
+                        if (!this.isEnterPlayer)
                         {
-                            this.OnEnterPlayer();
-                        }
-                        // 他のサカバンバスピスに接触した場合はプレイヤーの中に入っているかを確認する
-                        else if (!this.isEnterPlayer &&
-                                 other.attachedRigidbody.GetComponent<SacabambaspisController>() != null)
-                        {
-                            var otherSacabambaspis = other.attachedRigidbody.GetComponent<SacabambaspisController>();
-                            // 他のサカバンバスピスがプレイヤーの中に入っている場合は自分もプレイヤーの中に入る
-                            if (otherSacabambaspis.isEnterPlayer)
+                            // プレイヤーと接触した場合はプレイヤーの中に入ったとみなす
+                            if (other.attachedRigidbody.GetComponent<PlayerController>() != null)
                             {
                                 this.OnEnterPlayer();
+                            }
+                            else
+                            {
+                                // 他のサカバンバスピスがプレイヤーの中に入っている場合は自分もプレイヤーの中に入る
+                                var otherSacabambaspis = other.attachedRigidbody.GetComponent<SacabambaspisController>();
+                                if(otherSacabambaspis != null && otherSacabambaspis.isEnterPlayer)
+                                {
+                                    this.OnEnterPlayer();
+                                }
                             }
                         }
                     }
