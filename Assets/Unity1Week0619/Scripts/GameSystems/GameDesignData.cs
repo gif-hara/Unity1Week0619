@@ -167,9 +167,31 @@ namespace Unity1Week0619.Scripts.GameSystems
             private float decreaseAmountPerSeconds;
             
             /// <summary>
+            /// キャッチした際に加算する量
+            /// </summary>
+            [SerializeField]
+            private float onEnterAmount;
+            
+            /// <summary>
+            /// 離れた際に加算する量
+            /// </summary>
+            [SerializeField]
+            private float onExitAmount;
+
+            /// <summary>
             /// <inheritdoc cref="decreaseAmountPerSeconds"/>
             /// </summary>
             public float DecreaseAmountPerSeconds => this.decreaseAmountPerSeconds;
+            
+            /// <summary>
+            /// <inheritdoc cref="onEnterAmount"/>
+            /// </summary>
+            public float OnEnterAmount => this.onEnterAmount;
+            
+            /// <summary>
+            /// <inheritdoc cref="onExitAmount"/>
+            /// </summary>
+            public float OnExitAmount => this.onExitAmount;
         }
     }
 }

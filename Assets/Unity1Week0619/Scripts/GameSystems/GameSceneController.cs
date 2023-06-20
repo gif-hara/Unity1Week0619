@@ -43,6 +43,10 @@ namespace Unity1Week0619.GameSystems
                 {
                     score += this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
                     baspisGauge = Mathf.Clamp01(baspisGauge + this.gameDesignData.BaspisGaugeData.OnEnterAmount);
+                    if(fullBaspisModeStream != null)
+                    {
+                        fullBaspisModeGauge = Mathf.Clamp01(fullBaspisModeGauge + this.gameDesignData.FullBaspisModeData.OnEnterAmount);
+                    }
                     gameUIPresenter.SetSacabambaspisCount(score);
                     gameUIPresenter.SetBaspisGauge(baspisGauge);
 
@@ -75,6 +79,10 @@ namespace Unity1Week0619.GameSystems
                 {
                     score -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
                     baspisGauge = Mathf.Clamp01(baspisGauge - this.gameDesignData.BaspisGaugeData.OnExitAmount);
+                    if(fullBaspisModeStream != null)
+                    {
+                        fullBaspisModeGauge = Mathf.Clamp01(fullBaspisModeGauge - this.gameDesignData.FullBaspisModeData.OnExitAmount);
+                    }
                     gameUIPresenter.SetSacabambaspisCount(score);
                     gameUIPresenter.SetBaspisGauge(baspisGauge);
                 })
