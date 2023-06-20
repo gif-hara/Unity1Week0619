@@ -478,7 +478,7 @@ SpringJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.04291822, y: -0.73879755}
+  m_ConnectedAnchor: {x: 0.042918295, y: -0.7387976}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 1
@@ -1812,7 +1812,7 @@ SpringJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.019121349, y: 0.70531476}
+  m_ConnectedAnchor: {x: 0.01912126, y: 0.7053147}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 1
@@ -1994,7 +1994,7 @@ SpringJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.22618324, y: -0.80119336}
+  m_ConnectedAnchor: {x: 0.22618315, y: -0.8011934}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 1
@@ -2174,7 +2174,7 @@ GameObject:
   - component: {fileID: 7286062722966109339}
   - component: {fileID: 2334210812072815072}
   m_Layer: 0
-  m_Name: Sacabambaspis.01
+  m_Name: Sacabambaspis.Normal.01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2338,6 +2338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9439685f681b4887bbd4f38db4ca8066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sacabambaspisType: 0
+  targetRigidbody2D: {fileID: 7286062722966109339}
+  spawnDelaySeconds: 1
+  spawnEffectPrefab: {fileID: 2149102239875915021, guid: 78ad367afe879414c8bb3ab53154ed31, type: 3}
+  onEnterEffectPrefab: {fileID: 2149102239875915021, guid: b9b7a97f5e32643cb9131bd599588179, type: 3}
 --- !u!1 &7364679474029686604
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,7 +2478,7 @@ SpringJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.032029808, y: 0.89862025}
+  m_ConnectedAnchor: {x: -0.0320297, y: 0.89862025}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 1

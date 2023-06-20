@@ -770,6 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6413b4ea2cb420580fb0f896b3a5aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDesignData: {fileID: 11400000, guid: 0758243075d6b450499a1522337cfcd2, type: 2}
   sacabambaspisSpawner: {fileID: 1857440209}
   gameUIView: {fileID: 1177826016849460181, guid: 1baf40a5bb74efb4db74841dd7a10fd9, type: 3}
 --- !u!4 &1615416826
@@ -962,8 +963,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 630121217}
-  sacabambaspisPrefab: {fileID: 7286062722966109338, guid: 68061c3bab98fa1489e28cff8a323e05, type: 3}
-  spawnInterval: 1
+  normalSacabambaspisControllerPrefabs:
+  - {fileID: 2334210812072815072, guid: 68061c3bab98fa1489e28cff8a323e05, type: 3}
+  colorfulSacabambaspisControllerPrefabs:
+  - {fileID: 2334210812072815072, guid: 7c780a78810c1446da007a7a3228e09c, type: 3}
+  firstSpawnPoint: {fileID: 1857440208}
   spawnArea:
     serializedVersion: 2
     x: -20
