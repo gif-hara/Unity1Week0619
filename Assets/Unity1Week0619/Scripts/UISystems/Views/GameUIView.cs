@@ -75,6 +75,9 @@ namespace Unity1Week0619.UISystems
 
         [SerializeField]
         private MessageArea gameStartMessageArea;
+        
+        [SerializeField]
+        private MessageArea gameEndMessageArea;
 
         public SacabambaspisCountArea SacabambaspisCount => sacabambaspisCountArea;
         
@@ -83,5 +86,7 @@ namespace Unity1Week0619.UISystems
         public FullBaspisModeArea FullBaspisMode => fullBaspisModeArea;
         
         public MessageArea GameStartMessage => gameStartMessageArea;
+        
+        public MessageArea GameEndMessage => gameEndMessageArea;
     }
 }

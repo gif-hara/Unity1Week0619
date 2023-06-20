@@ -38,10 +38,19 @@ namespace Unity1Week0619.UISystems.Presenters
                 })
                 .AddTo(cancellationToken);
 
+            // ゲーム開始時にメッセージを出す
             MessageBroker.GetAsyncSubscriber<GameEvents.BeginGame>()
                 .Subscribe(async (_, ct) =>
                 {
                     await view.GameStartMessage.ShowAsync();
+                })
+                .AddTo(cancellationToken);
+            
+            // ゲーム終了時にメッセージを出す
+            MessageBroker.GetAsyncSubscriber<GameEvents.EndGame>()
+                .Subscribe(async (_, ct) =>
+                {
+                    await view.GameEndMessage.ShowAsync();
                 })
                 .AddTo(cancellationToken);
         }

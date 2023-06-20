@@ -42,6 +42,20 @@ namespace Unity1Week0619.GameSystems
         }
 
         /// <summary>
+        /// ゲームが終了するまで待つイベント
+        /// </summary>
+        public sealed class TakeUntilEndGame : Message<TakeUntilEndGame>
+        {
+        }
+
+        /// <summary>
+        /// ゲームが終了した際のイベント
+        /// </summary>
+        public sealed class EndGame : Message<EndGame>
+        {
+        }
+
+        /// <summary>
         /// イベントを登録する
         /// </summary>
         public static void RegisterEvents(BuiltinContainerBuilder builder)
@@ -51,6 +65,8 @@ namespace Unity1Week0619.GameSystems
             builder.AddMessageBroker<BeginFullBaspisMode>();
             builder.AddMessageBroker<EndFullBaspisMode>();
             builder.AddMessageBroker<BeginGame>();
+            builder.AddMessageBroker<TakeUntilEndGame>();
+            builder.AddMessageBroker<EndGame>();
         }
     }
 }
