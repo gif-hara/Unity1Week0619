@@ -31,19 +31,24 @@ namespace Unity1Week0619.GameSystems
             var gameUIPresenter = new GameUIPresenter(this.gameUIView);
 
             var score = 0;
+            var baspisGauge = this.gameDesignData.BaspisGaugeData.InitialAmount;
             gameUIPresenter.SetSacabambaspisCount(score);
             MessageBroker.GetSubscriber<GameEvents.OnEnterSacabambaspis>()
                 .Subscribe(x =>
                 {
                     score += this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                    baspisGauge += this.gameDesignData.BaspisGaugeData.OnEnterAmount;
                     gameUIPresenter.SetSacabambaspisCount(score);
+                    gameUIPresenter.SetBaspisGauge(baspisGauge);
                 })
                 .AddTo(ct);
             MessageBroker.GetSubscriber<GameEvents.OnExitSacabambaspis>()
                 .Subscribe(x =>
                 {
                     score -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                    baspisGauge -= this.gameDesignData.BaspisGaugeData.OnExitAmount;
                     gameUIPresenter.SetSacabambaspisCount(score);
+                    gameUIPresenter.SetBaspisGauge(baspisGauge);
                 })
                 .AddTo(ct);
         }

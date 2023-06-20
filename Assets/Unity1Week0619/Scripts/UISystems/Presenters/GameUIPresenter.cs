@@ -9,10 +9,21 @@
             this.View = UIManager.Open(viewPrefab);
         }
 
+        /// <summary>
+        /// サカバンバスピスカウントを設定する
+        /// </summary>
         public void SetSacabambaspisCount(int count)
         {
             // ローカライズは必要になったらする
             this.View.SacabambaspisCount.CountText.text = $"{count}バスピス！";
+        }
+        
+        /// <summary>
+        /// バスピスゲージの量を設定する
+        /// </summary>
+        public void SetBaspisGauge(float value)
+        {
+            this.View.BaspisGauge.Gauge.value = value;
         }
     }
 }

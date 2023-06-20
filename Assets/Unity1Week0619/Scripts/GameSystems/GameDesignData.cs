@@ -26,9 +26,20 @@ namespace Unity1Week0619.Scripts.GameSystems
         private LevelData_ levelData;
         
         /// <summary>
+        /// バスピスゲージに関するデータ
+        /// </summary>
+        [SerializeField]
+        private BaspisGaugeData_ baspisGaugeData;
+        
+        /// <summary>
         /// <inheritdoc cref="levelData"/>
         /// </summary>
         public LevelData_ LevelData => this.levelData;
+        
+        /// <summary>
+        /// <inheritdoc cref="baspisGaugeData"/>
+        /// </summary>
+        public BaspisGaugeData_ BaspisGaugeData => this.baspisGaugeData;
         
         /// <summary>
         /// <paramref name="sacabambaspisType"/>から<see cref="SacabambaspisData_"/>を返す
@@ -57,33 +68,11 @@ namespace Unity1Week0619.Scripts.GameSystems
             /// </summary>
             [SerializeField]
             private int score;
-
-            /// <summary>
-            /// キャッチした際に加算されるバスピスゲージの量
-            /// </summary>
-            [SerializeField]
-            private float onEnterBaspisGauge;
-            
-            /// <summary>
-            /// 離れた際に加算されるバスピスゲージの量
-            /// </summary>
-            [SerializeField]
-            private float onExitBaspisGauge;
             
             /// <summary>
             /// <inheritdoc cref="score"/>
             /// </summary>
             public int Score => this.score;
-            
-            /// <summary>
-            /// <inheritdoc cref="onEnterBaspisGauge"/>
-            /// </summary>
-            public float OnEnterBaspisGauge => this.onEnterBaspisGauge;
-            
-            /// <summary>
-            /// <inheritdoc cref="onExitBaspisGauge"/>
-            /// </summary>
-            public float OnExitBaspisGauge => this.onExitBaspisGauge;
         }
 
         /// <summary>
@@ -112,6 +101,46 @@ namespace Unity1Week0619.Scripts.GameSystems
 
                 return this.spawnIntervalSeconds[index];
             }
+        }
+
+        /// <summary>
+        /// バスピスゲージに関するデータ
+        /// </summary>
+        [Serializable]
+        public class BaspisGaugeData_
+        {
+            /// <summary>
+            /// ゲージの初期値
+            /// </summary>
+            [SerializeField, Range(0.0f, 1.0f)]
+            private float initialAmount;
+            
+            /// <summary>
+            /// サカバンバスピスをキャッチした際に加算される量
+            /// </summary>
+            [SerializeField]
+            private float onEnterAmount;
+            
+            /// <summary>
+            /// サカバンバスピスが離れた際に加算される量
+            /// </summary>
+            [SerializeField]
+            private float onExitAmount;
+
+            /// <summary>
+            /// <inheritdoc cref="initialAmount"/>
+            /// </summary>
+            public float InitialAmount => this.initialAmount;
+            
+            /// <summary>
+            /// <inheritdoc cref="onEnterAmount"/>
+            /// </summary>
+            public float OnEnterAmount => this.onEnterAmount;
+            
+            /// <summary>
+            /// <inheritdoc cref="onExitAmount"/>
+            /// </summary>
+            public float OnExitAmount => this.onExitAmount;
         }
     }
 }
