@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSacabambaspisData:
     score: 1
-    spawnAudioDataList: []
+    spawnAudioDataList:
+    - clip: {fileID: 8300000, guid: b783e2ce98596444e96b79694fc00e1e, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 1
     appearanceAudioDataList:
     - clip: {fileID: 8300000, guid: 4c35c18871ee22a4abff5dc43993024e, type: 3}
       volumeMin: 1
@@ -65,7 +70,12 @@ MonoBehaviour:
     spawnAddTorqueMax: 800
   colorfulSacabambaspisData:
     score: 2
-    spawnAudioDataList: []
+    spawnAudioDataList:
+    - clip: {fileID: 8300000, guid: b783e2ce98596444e96b79694fc00e1e, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 1
     appearanceAudioDataList:
     - clip: {fileID: 8300000, guid: 4c35c18871ee22a4abff5dc43993024e, type: 3}
       volumeMin: 1
