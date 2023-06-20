@@ -30,8 +30,6 @@ namespace Unity1Week0619.GameSystems
 
             var ct = this.GetCancellationTokenOnDestroy();
             this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, ct);
-
-
             var score = new AsyncReactiveProperty<int>(0);
             var baspisGauge = new AsyncReactiveProperty<float>(this.gameDesignData.BaspisGaugeData.InitialAmount);
             var fullBaspisModeGauge = new AsyncReactiveProperty<float>(0.0f);
