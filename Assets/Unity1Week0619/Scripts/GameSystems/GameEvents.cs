@@ -2,7 +2,7 @@
 
 namespace Unity1Week0619.Scripts.GameSystems
 {
-    public class GameEvents
+    public static class GameEvents
     {
         /// <summary>
         /// サカバンバスピスが器に入った際のイベント
@@ -21,12 +21,28 @@ namespace Unity1Week0619.Scripts.GameSystems
         }
 
         /// <summary>
+        /// フルバスピスモードが開始した際のイベント
+        /// </summary>
+        public sealed class BeginFullBaspisMode : Message<BeginFullBaspisMode>
+        {
+        }
+
+        /// <summary>
+        /// フルバスピスモードが終了した際のイベント
+        /// </summary>
+        public sealed class EndFullBaspisMode : Message<EndFullBaspisMode>
+        {
+        }
+
+        /// <summary>
         /// イベントを登録する
         /// </summary>
         public static void RegisterEvents(BuiltinContainerBuilder builder)
         {
             builder.AddMessageBroker<OnEnterSacabambaspis>();
             builder.AddMessageBroker<OnExitSacabambaspis>();
+            builder.AddMessageBroker<BeginFullBaspisMode>();
+            builder.AddMessageBroker<EndFullBaspisMode>();
         }
     }
 }

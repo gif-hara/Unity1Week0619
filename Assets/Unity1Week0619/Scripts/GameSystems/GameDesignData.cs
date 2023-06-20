@@ -32,6 +32,12 @@ namespace Unity1Week0619.Scripts.GameSystems
         private BaspisGaugeData_ baspisGaugeData;
         
         /// <summary>
+        /// フルバスピスモードに関するデータ
+        /// </summary>
+        [SerializeField]
+        private FullBaspisModeData_ fullBaspisModeData;
+        
+        /// <summary>
         /// <inheritdoc cref="levelData"/>
         /// </summary>
         public LevelData_ LevelData => this.levelData;
@@ -40,6 +46,11 @@ namespace Unity1Week0619.Scripts.GameSystems
         /// <inheritdoc cref="baspisGaugeData"/>
         /// </summary>
         public BaspisGaugeData_ BaspisGaugeData => this.baspisGaugeData;
+        
+        /// <summary>
+        /// <inheritdoc cref="fullBaspisModeData"/>
+        /// </summary>
+        public FullBaspisModeData_ FullBaspisModeData => this.fullBaspisModeData;
         
         /// <summary>
         /// <paramref name="sacabambaspisType"/>から<see cref="SacabambaspisData_"/>を返す
@@ -141,6 +152,24 @@ namespace Unity1Week0619.Scripts.GameSystems
             /// <inheritdoc cref="onExitAmount"/>
             /// </summary>
             public float OnExitAmount => this.onExitAmount;
+        }
+
+        /// <summary>
+        /// フルバスピスモードに関するデータ
+        /// </summary>
+        [Serializable]
+        public class FullBaspisModeData_
+        {
+            /// <summary>
+            /// フルバスピスモードゲージが秒間で減少する量
+            /// </summary>
+            [SerializeField]
+            private float decreaseAmountPerSeconds;
+            
+            /// <summary>
+            /// <inheritdoc cref="decreaseAmountPerSeconds"/>
+            /// </summary>
+            public float DecreaseAmountPerSeconds => this.decreaseAmountPerSeconds;
         }
     }
 }
