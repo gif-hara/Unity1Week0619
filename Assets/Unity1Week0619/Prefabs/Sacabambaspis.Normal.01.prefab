@@ -2340,7 +2340,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sacabambaspisType: 0
   targetRigidbody2D: {fileID: 7286062722966109339}
-  spawnDelaySeconds: 1
+  spawnDelaySeconds: 0.5
+  spawnVelocityMin: {x: 0, y: -10}
+  spawnVelocityMax: {x: 0, y: -10}
   spawnEffectPrefab: {fileID: 2149102239875915021, guid: 78ad367afe879414c8bb3ab53154ed31, type: 3}
   onEnterEffectPrefab: {fileID: 2149102239875915021, guid: b9b7a97f5e32643cb9131bd599588179, type: 3}
 --- !u!1 &7364679474029686604

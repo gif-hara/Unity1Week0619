@@ -19,9 +19,6 @@ namespace Unity1Week0619.GameSystems
         private Rigidbody2D targetRigidbody2D;
 
         [SerializeField]
-        private float spawnDelaySeconds;
-
-        [SerializeField]
         private GameObject spawnEffectPrefab;
 
         [SerializeField]
@@ -38,12 +35,21 @@ namespace Unity1Week0619.GameSystems
             Instantiate(this.spawnEffectPrefab, this.transform.position, Quaternion.identity);
             this.gameObject.SetActive(false);
             this.targetRigidbody2D.simulated = false;
-            PlaySE(gameDesignData.GetSacabambaspisData(this.sacabambaspisType).SpawnAudioDataList);
+            var sacabambaspisData = gameDesignData.GetSacabambaspisData(this.sacabambaspisType);
+            PlaySE(sacabambaspisData.SpawnAudioDataList);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(this.spawnDelaySeconds));
+            await UniTask.Delay(TimeSpan.FromSeconds(sacabambaspisData.SpawnDelaySeconds));
 
+            // ここで登場する
             this.gameObject.SetActive(true);
             this.targetRigidbody2D.simulated = true;
+            this.targetRigidbody2D.velocity = new Vector2(
+                UnityEngine.Random.Range(sacabambaspisData.SpawnVelocityMin.x, sacabambaspisData.SpawnVelocityMax.x),
+                UnityEngine.Random.Range(sacabambaspisData.SpawnVelocityMin.y, sacabambaspisData.SpawnVelocityMax.y)
+                );
+            this.targetRigidbody2D.AddTorque(
+                UnityEngine.Random.Range(sacabambaspisData.SpawnAddTorqueMin, sacabambaspisData.SpawnAddTorqueMax)
+                );
             PlaySE(gameDesignData.GetSacabambaspisData(this.sacabambaspisType).AppearanceAudioDataList);
 
             this.GetAsyncTriggerEnter2DTrigger()

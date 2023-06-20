@@ -104,6 +104,21 @@ namespace Unity1Week0619.GameSystems
             [SerializeField]
             private List<SoundEffectElement.AudioData> onExitAudioDataList;
 
+            [SerializeField]
+            private float spawnDelaySeconds;
+
+            [SerializeField]
+            private Vector2 spawnVelocityMin;
+
+            [SerializeField]
+            private Vector2 spawnVelocityMax;
+
+            [SerializeField]
+            private float spawnAddTorqueMin;
+
+            [SerializeField]
+            private float spawnAddTorqueMax;
+
             /// <summary>
             /// <inheritdoc cref="score"/>
             /// </summary>
@@ -116,6 +131,16 @@ namespace Unity1Week0619.GameSystems
             public List<SoundEffectElement.AudioData> OnEnterAudioDataList => this.onEnterAudioDataList;
 
             public List<SoundEffectElement.AudioData> OnExitAudioDataList => this.onExitAudioDataList;
+
+            public float SpawnDelaySeconds => this.spawnDelaySeconds;
+
+            public Vector2 SpawnVelocityMin => this.spawnVelocityMin;
+
+            public Vector2 SpawnVelocityMax => this.spawnVelocityMax;
+
+            public float SpawnAddTorqueMin => this.spawnAddTorqueMin;
+
+            public float SpawnAddTorqueMax => this.spawnAddTorqueMax;
         }
 
         /// <summary>
