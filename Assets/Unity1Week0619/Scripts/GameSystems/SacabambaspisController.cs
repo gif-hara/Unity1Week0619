@@ -18,6 +18,7 @@ namespace Unity1Week0619
         {
             if (collider.attachedRigidbody != null)
             {
+                // プレイヤーと接触した場合はプレイヤーの中に入ったとみなす
                 if(!this.isEnterPlayer && collider.attachedRigidbody.GetComponent<PlayerController>() != null)
                 {
                     this.isEnterPlayer = true;
@@ -25,9 +26,11 @@ namespace Unity1Week0619
                         .Publish(GameEvents.OnEnterSacabambaspis.Get());
 
                 }
+                // 他のサカバンバスピスに接触した場合はプレイヤーの中に入っているかを確認する
                 else if (!this.isEnterPlayer && collider.attachedRigidbody.GetComponent<SacabambaspisController>() != null)
                 {
                     var other = collider.attachedRigidbody.GetComponent<SacabambaspisController>();
+                    // 他のサカバンバスピスがプレイヤーの中に入っている場合は自分もプレイヤーの中に入る
                     if (other.isEnterPlayer)
                     {
                         this.isEnterPlayer = true;
