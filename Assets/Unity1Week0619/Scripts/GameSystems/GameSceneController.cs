@@ -34,7 +34,7 @@ namespace Unity1Week0619.GameSystems
             var baspisGauge = new AsyncReactiveProperty<float>(this.gameDesignData.BaspisGaugeData.InitialAmount);
             var fullBaspisModeGauge = new AsyncReactiveProperty<float>(0.0f);
             IDisposable fullBaspisModeStream = null;
-            var gameUIPresenter = new GameUIPresenter(
+            GameUIPresenter.Setup(
                 this.gameUIView,
                 score,
                 baspisGauge,

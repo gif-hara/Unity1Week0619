@@ -6,9 +6,7 @@ namespace Unity1Week0619.UISystems.Presenters
 {
     public class GameUIPresenter
     {
-        private GameUIView View { get; }
-
-        public GameUIPresenter(
+        public static void Setup(
             GameUIView viewPrefab,
             IUniTaskAsyncEnumerable<int> score,
             IUniTaskAsyncEnumerable<float> baspisGauge,
@@ -16,24 +14,25 @@ namespace Unity1Week0619.UISystems.Presenters
             CancellationToken cancellationToken
             )
         {
-            this.View = UIManager.Open(viewPrefab);
+            var view = UIManager.Open(viewPrefab);
+            
             score
                 .Subscribe(x =>
                 {
                     // ローカライズは必要になったらする
-                    this.View.SacabambaspisCount.CountText.text = $"{x}バスピス！";
+                    view.SacabambaspisCount.CountText.text = $"{x}バスピス！";
                 })
                 .AddTo(cancellationToken);
             baspisGauge
                 .Subscribe(x =>
                 {
-                    this.View.BaspisGauge.Gauge.value = x;
+                    view.BaspisGauge.Gauge.value = x;
                 })
                 .AddTo(cancellationToken);
             fullBaspisModeGauge
                 .Subscribe(x =>
                 {
-                    this.View.FullBaspisMode.Gauge.value = x;
+                    view.FullBaspisMode.Gauge.value = x;
                 })
                 .AddTo(cancellationToken);
         }
