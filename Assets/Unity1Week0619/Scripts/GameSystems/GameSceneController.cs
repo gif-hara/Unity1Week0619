@@ -29,9 +29,9 @@ namespace Unity1Week0619.GameSystems
             this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, ct);
 
             var gameUIPresenter = new GameUIPresenter(this.gameUIView);
-            gameUIPresenter.SetSacabambaspisCount(0);
 
             var score = 0;
+            gameUIPresenter.SetSacabambaspisCount(score);
             MessageBroker.GetSubscriber<GameEvents.OnEnterSacabambaspis>()
                 .Subscribe(x =>
                 {
