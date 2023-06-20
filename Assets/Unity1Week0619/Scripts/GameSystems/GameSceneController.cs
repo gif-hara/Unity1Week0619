@@ -120,6 +120,7 @@ namespace Unity1Week0619.GameSystems
                 await MessageBroker.GetAsyncPublisher<GameEvents.TakeUntilEndGame>()
                     .PublishAsync(GameEvents.TakeUntilEndGame.Get(), gameSceneToken);
 
+                inGameTokenSource.Cancel();
                 inGameTokenSource.Dispose();
 
                 // ゲーム終了
