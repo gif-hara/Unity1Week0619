@@ -1,4 +1,5 @@
 ﻿using MessagePipe;
+using UnityEngine;
 
 namespace Unity1Week0619.GameSystems
 {
@@ -15,7 +16,7 @@ namespace Unity1Week0619.GameSystems
         /// <summary>
         /// サカバンバスピスが器から出た際のイベント
         /// </summary>
-        public sealed class OnExitSacabambaspis : Message<OnExitSacabambaspis, Define.SacabambaspisType, bool>
+        public sealed class OnExitSacabambaspis : Message<OnExitSacabambaspis, Define.SacabambaspisType, bool, Vector3, string>
         {
             public Define.SacabambaspisType SacabambaspisType => this.Param1;
 
@@ -23,6 +24,10 @@ namespace Unity1Week0619.GameSystems
             /// プレイヤーの中に入ったか
             /// </summary>
             public bool IsEnteredPlayer => this.Param2;
+
+            public Vector3 Position => this.Param3;
+
+            public string Serif => this.Param4;
         }
 
         /// <summary>

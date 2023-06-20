@@ -85,9 +85,16 @@ namespace Unity1Week0619.GameSystems
                         if (other.CompareTag("Deadline"))
                         {
                             Destroy(this.gameObject);
-                            PlaySE(gameDesignData.GetSacabambaspisData(this.sacabambaspisType).OnExitAudioDataList);
+                            var audioData = sacabambaspisData.OnExitAudioDataList[UnityEngine.Random.Range(0, sacabambaspisData.OnExitAudioDataList.Count)];
+                            AudioManager.PlaySE(audioData.AudioData);
                             MessageBroker.GetPublisher<GameEvents.OnExitSacabambaspis>()
-                                .Publish(GameEvents.OnExitSacabambaspis.Get(this.sacabambaspisType, this.isEnterPlayer));
+                                .Publish(GameEvents.OnExitSacabambaspis.Get(
+                                        this.sacabambaspisType,
+                                        this.isEnterPlayer,
+                                        this.transform.localPosition,
+                                        audioData.Serif
+                                        )
+                                    );
                         }
                     }
                 })

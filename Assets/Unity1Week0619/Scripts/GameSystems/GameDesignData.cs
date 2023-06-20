@@ -76,7 +76,7 @@ namespace Unity1Week0619.GameSystems
         public class SacabambaspisData_
         {
             [Serializable]
-            public class AppearanceAudioData
+            public class AudioDataWithSerif
             {
                 [SerializeField]
                 private SoundEffectElement.AudioData audioData;
@@ -104,7 +104,7 @@ namespace Unity1Week0619.GameSystems
             /// 登場した時に再生されるサウンドデータリスト
             /// </summary>
             [SerializeField]
-            private List<AppearanceAudioData> appearanceAudioDataList;
+            private List<AudioDataWithSerif> appearanceAudioDataList;
 
             /// <summary>
             /// キャッチされた時に再生されるサウンドデータリスト
@@ -116,7 +116,7 @@ namespace Unity1Week0619.GameSystems
             /// 離れた時に再生されるサウンドデータリスト
             /// </summary>
             [SerializeField]
-            private List<SoundEffectElement.AudioData> onExitAudioDataList;
+            private List<AudioDataWithSerif> onExitAudioDataList;
 
             [SerializeField]
             private float spawnDelaySeconds;
@@ -140,11 +140,11 @@ namespace Unity1Week0619.GameSystems
 
             public List<SoundEffectElement.AudioData> SpawnAudioDataList => this.spawnAudioDataList;
 
-            public List<AppearanceAudioData> AppearanceAudioDataList => this.appearanceAudioDataList;
+            public List<AudioDataWithSerif> AppearanceAudioDataList => this.appearanceAudioDataList;
 
             public List<SoundEffectElement.AudioData> OnEnterAudioDataList => this.onEnterAudioDataList;
 
-            public List<SoundEffectElement.AudioData> OnExitAudioDataList => this.onExitAudioDataList;
+            public List<AudioDataWithSerif> OnExitAudioDataList => this.onExitAudioDataList;
 
             public float SpawnDelaySeconds => this.spawnDelaySeconds;
 

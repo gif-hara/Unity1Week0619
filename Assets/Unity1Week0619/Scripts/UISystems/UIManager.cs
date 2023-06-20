@@ -11,7 +11,12 @@ namespace Unity1Week0619.UISystems
         [SerializeField]
         private RectTransform uiParent;
 
+        [SerializeField]
+        private Camera uiCamera;
+
         public static UIManager Instance { get; private set; }
+
+        public static Camera UICamera => Instance.uiCamera;
 
         public static async UniTask SetupAsync()
         {
