@@ -711,6 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f959bf4eb01c40448cfae982642af2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetCamera: {fileID: 519420031}
   targetRigidbody2D: {fileID: 970603955}
   smoothDamp: 2
 --- !u!50 &970603955

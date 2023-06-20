@@ -8,21 +8,20 @@ namespace Unity1Week0619.GameSystems
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
+        private Camera targetCamera;
+        
+        [SerializeField]
         private Rigidbody2D targetRigidbody2D;
 
         [SerializeField]
         private float smoothDamp;
 
-        private Vector2 velocity;
-
-        // マウスの座標と同期を取る
         private void Update()
         {
-            var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var pos = this.targetCamera.ScreenToWorldPoint(Input.mousePosition);
             pos.z = 0;
             var pos2D = new Vector2(pos.x, pos.y);
 
-            // Rigidbody2dに対して、SmoothDampを使って移動させる
             targetRigidbody2D.velocity = (pos2D - targetRigidbody2D.position) * this.smoothDamp;
         }
     }
