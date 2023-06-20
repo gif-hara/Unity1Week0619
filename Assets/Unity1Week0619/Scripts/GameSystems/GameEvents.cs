@@ -15,9 +15,14 @@ namespace Unity1Week0619.GameSystems
         /// <summary>
         /// サカバンバスピスが器から出た際のイベント
         /// </summary>
-        public sealed class OnExitSacabambaspis : Message<OnExitSacabambaspis, Define.SacabambaspisType>
+        public sealed class OnExitSacabambaspis : Message<OnExitSacabambaspis, Define.SacabambaspisType, bool>
         {
             public Define.SacabambaspisType SacabambaspisType => this.Param1;
+
+            /// <summary>
+            /// プレイヤーの中に入ったか
+            /// </summary>
+            public bool IsEnteredPlayer => this.Param2;
         }
 
         /// <summary>
@@ -33,7 +38,7 @@ namespace Unity1Week0619.GameSystems
         public sealed class EndFullBaspisMode : Message<EndFullBaspisMode>
         {
         }
-        
+
         /// <summary>
         /// ゲームが開始された際のイベント
         /// </summary>

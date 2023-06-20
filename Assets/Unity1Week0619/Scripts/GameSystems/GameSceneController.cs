@@ -87,7 +87,10 @@ namespace Unity1Week0619.GameSystems
                 MessageBroker.GetSubscriber<GameEvents.OnExitSacabambaspis>()
                     .Subscribe(x =>
                     {
-                        score.Value -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                        if (x.IsEnteredPlayer)
+                        {
+                            score.Value -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                        }
                         if (fullBaspisModeStream != null)
                         {
                             fullBaspisModeGauge.Value = Mathf.Clamp01(fullBaspisModeGauge - this.gameDesignData.FullBaspisModeData.OnExitAmount);

@@ -13,19 +13,19 @@ namespace Unity1Week0619.GameSystems
     {
         [SerializeField]
         private Define.SacabambaspisType sacabambaspisType;
-        
+
         [SerializeField]
         private Rigidbody2D targetRigidbody2D;
-        
+
         [SerializeField]
         private float spawnDelaySeconds;
-        
+
         [SerializeField]
         private GameObject spawnEffectPrefab;
 
         [SerializeField]
         private GameObject onEnterEffectPrefab;
-        
+
         /// <summary>
         /// プレイヤーの中に入ったか
         /// </summary>
@@ -40,7 +40,7 @@ namespace Unity1Week0619.GameSystems
             // TODO: SE再生
 
             await UniTask.Delay(TimeSpan.FromSeconds(this.spawnDelaySeconds));
-            
+
             this.gameObject.SetActive(true);
             this.targetRigidbody2D.simulated = true;
             // TODO: SE再生する？
@@ -73,11 +73,8 @@ namespace Unity1Week0619.GameSystems
                         if (other.CompareTag("Deadline"))
                         {
                             Destroy(this.gameObject);
-                            if (this.isEnterPlayer)
-                            {
-                                MessageBroker.GetPublisher<GameEvents.OnExitSacabambaspis>()
-                                    .Publish(GameEvents.OnExitSacabambaspis.Get(this.sacabambaspisType));
-                            }
+                            MessageBroker.GetPublisher<GameEvents.OnExitSacabambaspis>()
+                                .Publish(GameEvents.OnExitSacabambaspis.Get(this.sacabambaspisType, this.isEnterPlayer));
                         }
                     }
                 })
