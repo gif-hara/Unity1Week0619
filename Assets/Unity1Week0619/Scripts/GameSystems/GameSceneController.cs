@@ -52,6 +52,7 @@ namespace Unity1Week0619.GameSystems
                     }
                     gameUIPresenter.SetSacabambaspisCount(score);
                     gameUIPresenter.SetBaspisGauge(baspisGauge);
+                    gameUIPresenter.SetFullBaspisModeGauge(fullBaspisModeGauge);
 
                     if (baspisGauge >= 1.0f && fullBaspisModeStream == null)
                     {
@@ -63,6 +64,7 @@ namespace Unity1Week0619.GameSystems
                             .Subscribe(_ =>
                             {
                                 fullBaspisModeGauge -= this.gameDesignData.FullBaspisModeData.DecreaseAmountPerSeconds * UnityEngine.Time.deltaTime;
+                                gameUIPresenter.SetFullBaspisModeGauge(fullBaspisModeGauge);
                                 if (fullBaspisModeGauge <= 0.0f)
                                 {
                                     // フルバスピスモード終了

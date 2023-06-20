@@ -25,5 +25,13 @@
         {
             this.View.BaspisGauge.Gauge.value = value;
         }
+        
+        /// <summary>
+        /// フルバスピスモードのゲージの量を設定する
+        /// </summary>
+        public void SetFullBaspisModeGauge(float value)
+        {
+            this.View.FullBaspisMode.Gauge.value = value;
+        }
     }
 }
