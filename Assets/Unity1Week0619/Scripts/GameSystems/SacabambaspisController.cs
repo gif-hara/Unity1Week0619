@@ -1,4 +1,6 @@
-﻿using Unity1Week0619.GameSystems;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using Unity1Week0619.GameSystems;
 using Unity1Week0619.Scripts.GameSystems;
 using UnityEngine;
 
@@ -9,10 +11,34 @@ namespace Unity1Week0619
     /// </summary>
     public class SacabambaspisController : MonoBehaviour
     {
+        [SerializeField]
+        private Rigidbody2D targetRigidbody2D;
+        
+        [SerializeField]
+        private float spawnDelaySeconds;
+        
+        [SerializeField]
+        private GameObject effectPrefab;
+        
         /// <summary>
         /// プレイヤーの中に入ったか
         /// </summary>
         private bool isEnterPlayer;
+
+        private async void Start()
+        {
+            // 最初にエフェクトを生成する
+            Instantiate(this.effectPrefab, this.transform.position, Quaternion.identity);
+            this.gameObject.SetActive(false);
+            this.targetRigidbody2D.simulated = false;
+            // TODO: SE再生
+
+            await UniTask.Delay(TimeSpan.FromSeconds(this.spawnDelaySeconds));
+            
+            this.gameObject.SetActive(true);
+            this.targetRigidbody2D.simulated = true;
+            // TODO: SE再生する？
+        }
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
