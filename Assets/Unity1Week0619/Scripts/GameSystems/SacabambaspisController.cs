@@ -2,11 +2,9 @@
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Cysharp.Threading.Tasks.Triggers;
-using Unity1Week0619.GameSystems;
-using Unity1Week0619.Scripts.GameSystems;
 using UnityEngine;
 
-namespace Unity1Week0619
+namespace Unity1Week0619.GameSystems
 {
     /// <summary>
     /// サカバンバスピスを制御するクラス

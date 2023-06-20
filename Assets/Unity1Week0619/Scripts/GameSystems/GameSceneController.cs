@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Cysharp.Threading.Tasks.Triggers;
 using MessagePipe;
-using Unity1Week0619.Scripts.GameSystems;
 using Unity1Week0619.UISystems;
 using Unity1Week0619.UISystems.Presenters;
 using UnityEngine;

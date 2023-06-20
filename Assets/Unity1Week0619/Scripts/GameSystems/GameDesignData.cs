@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unity1Week0619.Scripts.GameSystems
+namespace Unity1Week0619.GameSystems
 {
     [CreateAssetMenu(menuName = "Unity1Week0619/GameDesignData")]
     public class GameDesignData : ScriptableObject

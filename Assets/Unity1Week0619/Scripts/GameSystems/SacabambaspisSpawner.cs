@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using MessagePipe;
-using Unity1Week0619.Scripts.GameSystems;
 using UnityEngine;
 
 namespace Unity1Week0619.GameSystems

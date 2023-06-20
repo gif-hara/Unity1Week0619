@@ -1,6 +1,6 @@
 ﻿using MessagePipe;
 
-namespace Unity1Week0619.Scripts.GameSystems
+namespace Unity1Week0619.GameSystems
 {
     public static class GameEvents
     {

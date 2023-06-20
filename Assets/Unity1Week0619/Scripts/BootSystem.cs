@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Unity1Week0619.Scripts.GameSystems;
+using Unity1Week0619.GameSystems;
 using Unity1Week0619.UISystems;
 using UnityEngine;
 
