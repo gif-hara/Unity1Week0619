@@ -21,8 +21,43 @@ MonoBehaviour:
       volumeMax: 1
       pitchMin: 1
       pitchMax: 2
-    onEnterAudioDataList: []
-    onExitAudioDataList: []
+    - clip: {fileID: 8300000, guid: db0d511a6af944743b50398ab2a1ebf8, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 2
+    - clip: {fileID: 8300000, guid: baf7c7d56aafb0149bd3c1a0e0bb5bc0, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 2
+    onEnterAudioDataList:
+    - clip: {fileID: 8300000, guid: 6bdc1f537ce60fb4d8b7b80107a857ba, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 2
+    - clip: {fileID: 8300000, guid: 821f15cc68fc65245a0dc202482d1a7d, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 2
+    - clip: {fileID: 8300000, guid: 6628d8769decb9c4f98c1ac1ee5bca48, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 2
+    onExitAudioDataList:
+    - clip: {fileID: 8300000, guid: a84c2bb4aee65b148bf67349ae140316, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 2
+    - clip: {fileID: 8300000, guid: 54262d91ebe1fb04eaf40ce7e1edd45a, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 2
   colorfulSacabambaspisData:
     score: 2
     spawnAudioDataList: []
