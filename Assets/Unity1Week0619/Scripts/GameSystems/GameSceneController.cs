@@ -31,47 +31,47 @@ namespace Unity1Week0619.GameSystems
             var ct = this.GetCancellationTokenOnDestroy();
             this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, ct);
 
-            var gameUIPresenter = new GameUIPresenter(this.gameUIView);
 
-            var score = 0;
-            var baspisGauge = this.gameDesignData.BaspisGaugeData.InitialAmount;
-            var fullBaspisModeGauge = 0.0f;
+            var score = new AsyncReactiveProperty<int>(0);
+            var baspisGauge = new AsyncReactiveProperty<float>(this.gameDesignData.BaspisGaugeData.InitialAmount);
+            var fullBaspisModeGauge = new AsyncReactiveProperty<float>(0.0f);
             IDisposable fullBaspisModeStream = null;
-            gameUIPresenter.SetSacabambaspisCount(score);
+            var gameUIPresenter = new GameUIPresenter(
+                this.gameUIView,
+                score,
+                baspisGauge,
+                fullBaspisModeGauge,
+                ct
+                );
             MessageBroker.GetSubscriber<GameEvents.OnEnterSacabambaspis>()
                 .Subscribe(x =>
                 {
-                    score += this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                    score.Value += this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
                     if(fullBaspisModeStream != null)
                     {
-                        fullBaspisModeGauge = Mathf.Clamp01(fullBaspisModeGauge + this.gameDesignData.FullBaspisModeData.OnEnterAmount);
+                        fullBaspisModeGauge.Value = Mathf.Clamp01(fullBaspisModeGauge.Value + this.gameDesignData.FullBaspisModeData.OnEnterAmount);
                     }
                     else
                     {
-                        baspisGauge = Mathf.Clamp01(baspisGauge + this.gameDesignData.BaspisGaugeData.OnEnterAmount);
+                        baspisGauge.Value = Mathf.Clamp01(baspisGauge.Value + this.gameDesignData.BaspisGaugeData.OnEnterAmount);
                     }
-                    gameUIPresenter.SetSacabambaspisCount(score);
-                    gameUIPresenter.SetBaspisGauge(baspisGauge);
-                    gameUIPresenter.SetFullBaspisModeGauge(fullBaspisModeGauge);
 
                     if (baspisGauge >= 1.0f && fullBaspisModeStream == null)
                     {
                         // フルバスピスモード開始
                         MessageBroker.GetPublisher<GameEvents.BeginFullBaspisMode>()
                             .Publish(GameEvents.BeginFullBaspisMode.Get());
-                        fullBaspisModeGauge = 1.0f;
+                        fullBaspisModeGauge.Value = 1.0f;
                         fullBaspisModeStream = this.GetAsyncUpdateTrigger()
                             .Subscribe(_ =>
                             {
-                                fullBaspisModeGauge -= this.gameDesignData.FullBaspisModeData.DecreaseAmountPerSeconds * UnityEngine.Time.deltaTime;
-                                gameUIPresenter.SetFullBaspisModeGauge(fullBaspisModeGauge);
+                                fullBaspisModeGauge.Value -= this.gameDesignData.FullBaspisModeData.DecreaseAmountPerSeconds * UnityEngine.Time.deltaTime;
                                 if (fullBaspisModeGauge <= 0.0f)
                                 {
                                     // フルバスピスモード終了
                                     fullBaspisModeStream?.Dispose();
                                     fullBaspisModeStream = null;
-                                    baspisGauge = this.gameDesignData.BaspisGaugeData.InitialAmount;
-                                    gameUIPresenter.SetBaspisGauge(baspisGauge);
+                                    baspisGauge.Value = this.gameDesignData.BaspisGaugeData.InitialAmount;
                                     MessageBroker.GetPublisher<GameEvents.EndFullBaspisMode>()
                                         .Publish(GameEvents.EndFullBaspisMode.Get());
                                 }
@@ -82,17 +82,15 @@ namespace Unity1Week0619.GameSystems
             MessageBroker.GetSubscriber<GameEvents.OnExitSacabambaspis>()
                 .Subscribe(x =>
                 {
-                    score -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                    score.Value -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
                     if(fullBaspisModeStream != null)
                     {
-                        fullBaspisModeGauge = Mathf.Clamp01(fullBaspisModeGauge - this.gameDesignData.FullBaspisModeData.OnExitAmount);
+                        fullBaspisModeGauge.Value = Mathf.Clamp01(fullBaspisModeGauge - this.gameDesignData.FullBaspisModeData.OnExitAmount);
                     }
                     else
                     {
-                        baspisGauge = Mathf.Clamp01(baspisGauge - this.gameDesignData.BaspisGaugeData.OnExitAmount);
+                        baspisGauge.Value = Mathf.Clamp01(baspisGauge.Value - this.gameDesignData.BaspisGaugeData.OnExitAmount);
                     }
-                    gameUIPresenter.SetSacabambaspisCount(score);
-                    gameUIPresenter.SetBaspisGauge(baspisGauge);
                 })
                 .AddTo(ct);
         }
