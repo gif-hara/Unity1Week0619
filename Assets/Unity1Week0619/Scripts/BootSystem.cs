@@ -23,6 +23,7 @@ namespace Unity1Week0619
             await UniTask.WhenAll(
                 SetupMessageBrokerAsync(),
                 UIManager.SetupAsync(),
+                AudioManager.SetupAsync(),
                 UniTask.DelayFrame(1)
                 );
 

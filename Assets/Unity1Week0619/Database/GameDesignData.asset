@@ -14,8 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalSacabambaspisData:
     score: 1
+    spawnAudioDataList: []
+    appearanceAudioDataList:
+    - clip: {fileID: 8300000, guid: 4c35c18871ee22a4abff5dc43993024e, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 2
+    onEnterAudioDataList: []
+    onExitAudioDataList: []
   colorfulSacabambaspisData:
     score: 2
+    spawnAudioDataList: []
+    appearanceAudioDataList: []
+    onEnterAudioDataList: []
+    onExitAudioDataList: []
   levelData:
     spawnIntervalSeconds:
     - 2

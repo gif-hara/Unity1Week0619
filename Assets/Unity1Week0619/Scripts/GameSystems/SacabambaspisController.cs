@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Cysharp.Threading.Tasks.Triggers;
@@ -31,19 +32,19 @@ namespace Unity1Week0619.GameSystems
         /// </summary>
         private bool isEnterPlayer;
 
-        private async void Start()
+        public async UniTask SetupAsync(GameDesignData gameDesignData)
         {
             // 最初にエフェクトを生成する
             Instantiate(this.spawnEffectPrefab, this.transform.position, Quaternion.identity);
             this.gameObject.SetActive(false);
             this.targetRigidbody2D.simulated = false;
-            // TODO: SE再生
+            PlaySE(gameDesignData.GetSacabambaspisData(this.sacabambaspisType).SpawnAudioDataList);
 
             await UniTask.Delay(TimeSpan.FromSeconds(this.spawnDelaySeconds));
 
             this.gameObject.SetActive(true);
             this.targetRigidbody2D.simulated = true;
-            // TODO: SE再生する？
+            PlaySE(gameDesignData.GetSacabambaspisData(this.sacabambaspisType).AppearanceAudioDataList);
 
             this.GetAsyncTriggerEnter2DTrigger()
                 .Subscribe(other =>
@@ -55,7 +56,7 @@ namespace Unity1Week0619.GameSystems
                             // プレイヤーと接触した場合はプレイヤーの中に入ったとみなす
                             if (other.attachedRigidbody.GetComponent<PlayerController>() != null)
                             {
-                                this.OnEnterPlayer();
+                                this.OnEnterPlayer(gameDesignData);
                             }
                             else
                             {
@@ -63,7 +64,7 @@ namespace Unity1Week0619.GameSystems
                                 var otherSacabambaspis = other.attachedRigidbody.GetComponent<SacabambaspisController>();
                                 if(otherSacabambaspis != null && otherSacabambaspis.isEnterPlayer)
                                 {
-                                    this.OnEnterPlayer();
+                                    this.OnEnterPlayer(gameDesignData);
                                 }
                             }
                         }
@@ -73,6 +74,7 @@ namespace Unity1Week0619.GameSystems
                         if (other.CompareTag("Deadline"))
                         {
                             Destroy(this.gameObject);
+                            PlaySE(gameDesignData.GetSacabambaspisData(this.sacabambaspisType).OnExitAudioDataList);
                             MessageBroker.GetPublisher<GameEvents.OnExitSacabambaspis>()
                                 .Publish(GameEvents.OnExitSacabambaspis.Get(this.sacabambaspisType, this.isEnterPlayer));
                         }
@@ -84,12 +86,23 @@ namespace Unity1Week0619.GameSystems
         /// <summary>
         /// プレイヤーの中に入った際の処理
         /// </summary>
-        private void OnEnterPlayer()
+        private void OnEnterPlayer(GameDesignData gameDesignData)
         {
             this.isEnterPlayer = true;
             Instantiate(this.onEnterEffectPrefab, this.transform.position, Quaternion.identity);
+            PlaySE(gameDesignData.GetSacabambaspisData(this.sacabambaspisType).OnEnterAudioDataList);
             MessageBroker.GetPublisher<GameEvents.OnEnterSacabambaspis>()
                 .Publish(GameEvents.OnEnterSacabambaspis.Get(this.sacabambaspisType));
+        }
+
+        private static void PlaySE(List<SoundEffectElement.AudioData> dataList)
+        {
+            if(dataList.Count <= 0)
+            {
+                return;
+            }
+            var audioData = dataList[UnityEngine.Random.Range(0, dataList.Count)];
+            AudioManager.PlaySE(audioData);
         }
     }
 }

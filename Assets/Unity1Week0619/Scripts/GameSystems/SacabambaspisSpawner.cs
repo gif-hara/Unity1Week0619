@@ -61,7 +61,8 @@ namespace Unity1Week0619.GameSystems
                         }
 
                         var position = this.GetSpawnPosition(spawnCount);
-                        Instantiate(GetSacabambaspisControllerPrefab(isFullBaspisMode), position, Quaternion.identity, this.parent);
+                        var sacabambaspis = Instantiate(GetSacabambaspisControllerPrefab(isFullBaspisMode), position, Quaternion.identity, this.parent);
+                        sacabambaspis.SetupAsync(gameDesignData).Forget();
                         spawnCount++;
                     }
                 },
