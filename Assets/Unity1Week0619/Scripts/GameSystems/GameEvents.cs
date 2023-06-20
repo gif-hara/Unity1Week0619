@@ -33,6 +33,13 @@ namespace Unity1Week0619.GameSystems
         public sealed class EndFullBaspisMode : Message<EndFullBaspisMode>
         {
         }
+        
+        /// <summary>
+        /// ゲームが開始された際のイベント
+        /// </summary>
+        public sealed class BeginGame : Message<BeginGame>
+        {
+        }
 
         /// <summary>
         /// イベントを登録する
@@ -43,6 +50,7 @@ namespace Unity1Week0619.GameSystems
             builder.AddMessageBroker<OnExitSacabambaspis>();
             builder.AddMessageBroker<BeginFullBaspisMode>();
             builder.AddMessageBroker<EndFullBaspisMode>();
+            builder.AddMessageBroker<BeginGame>();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +44,26 @@ namespace Unity1Week0619.UISystems
             public Slider Gauge => gauge;
         }
 
+        /// <summary>
+        /// メッセージを表示するエリア
+        /// </summary>
+        [Serializable]
+        public class MessageArea
+        {
+            [SerializeField]
+            private GameObject root;
+            
+            [SerializeField]
+            private float delaySeconds;
+            
+            public async UniTask ShowAsync()
+            {
+                this.root.SetActive(true);
+                await UniTask.Delay(TimeSpan.FromSeconds(this.delaySeconds));
+                this.root.SetActive(false);
+            }
+        }
+
         [SerializeField]
         private SacabambaspisCountArea sacabambaspisCountArea;
         
@@ -52,10 +73,15 @@ namespace Unity1Week0619.UISystems
         [SerializeField]
         private FullBaspisModeArea fullBaspisModeArea;
 
+        [SerializeField]
+        private MessageArea gameStartMessageArea;
+
         public SacabambaspisCountArea SacabambaspisCount => sacabambaspisCountArea;
         
         public BaspisGaugeArea BaspisGauge => baspisGaugeArea;
         
         public FullBaspisModeArea FullBaspisMode => fullBaspisModeArea;
+        
+        public MessageArea GameStartMessage => gameStartMessageArea;
     }
 }

@@ -25,10 +25,11 @@ namespace Unity1Week0619.GameSystems
 
         async void Start()
         {
+            // ブートシステム初期化待ち
             await BootSystem.IsReady;
 
+            // ゲームシステム初期化
             var ct = this.GetCancellationTokenOnDestroy();
-            this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, ct);
             var score = new AsyncReactiveProperty<int>(0);
             var baspisGauge = new AsyncReactiveProperty<float>(this.gameDesignData.BaspisGaugeData.InitialAmount);
             var fullBaspisModeGauge = new AsyncReactiveProperty<float>(0.0f);
@@ -90,6 +91,12 @@ namespace Unity1Week0619.GameSystems
                     }
                 })
                 .AddTo(ct);
+
+            // ゲームを開始する
+            await MessageBroker.GetAsyncPublisher<GameEvents.BeginGame>()
+                .PublishAsync(GameEvents.BeginGame.Get(), ct);
+            
+            this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, ct);
         }
     }
 }

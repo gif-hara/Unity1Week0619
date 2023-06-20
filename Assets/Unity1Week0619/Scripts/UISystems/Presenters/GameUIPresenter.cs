@@ -1,10 +1,12 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using MessagePipe;
+using Unity1Week0619.GameSystems;
 
 namespace Unity1Week0619.UISystems.Presenters
 {
-    public class GameUIPresenter
+    public static class GameUIPresenter
     {
         public static void Setup(
             GameUIView viewPrefab,
@@ -33,6 +35,13 @@ namespace Unity1Week0619.UISystems.Presenters
                 .Subscribe(x =>
                 {
                     view.FullBaspisMode.Gauge.value = x;
+                })
+                .AddTo(cancellationToken);
+
+            MessageBroker.GetAsyncSubscriber<GameEvents.BeginGame>()
+                .Subscribe(async (_, ct) =>
+                {
+                    await view.GameStartMessage.ShowAsync();
                 })
                 .AddTo(cancellationToken);
         }
