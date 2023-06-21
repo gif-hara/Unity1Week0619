@@ -33,12 +33,6 @@ namespace Unity1Week0619.GameSystems
         private BaspisGaugeData_ baspisGaugeData;
 
         /// <summary>
-        /// フルバスピスモードに関するデータ
-        /// </summary>
-        [SerializeField]
-        private FullBaspisModeData_ fullBaspisModeData;
-
-        /// <summary>
         /// <inheritdoc cref="levelData"/>
         /// </summary>
         public LevelData_ LevelData => this.levelData;
@@ -47,12 +41,7 @@ namespace Unity1Week0619.GameSystems
         /// <inheritdoc cref="baspisGaugeData"/>
         /// </summary>
         public BaspisGaugeData_ BaspisGaugeData => this.baspisGaugeData;
-
-        /// <summary>
-        /// <inheritdoc cref="fullBaspisModeData"/>
-        /// </summary>
-        public FullBaspisModeData_ FullBaspisModeData => this.fullBaspisModeData;
-
+        
         /// <summary>
         /// <paramref name="sacabambaspisType"/>から<see cref="SacabambaspisData_"/>を返す
         /// </summary>
@@ -213,46 +202,6 @@ namespace Unity1Week0619.GameSystems
             /// <inheritdoc cref="initialAmount"/>
             /// </summary>
             public float InitialAmount => this.initialAmount;
-
-            /// <summary>
-            /// <inheritdoc cref="onEnterAmount"/>
-            /// </summary>
-            public float OnEnterAmount => this.onEnterAmount;
-
-            /// <summary>
-            /// <inheritdoc cref="onExitAmount"/>
-            /// </summary>
-            public float OnExitAmount => this.onExitAmount;
-        }
-
-        /// <summary>
-        /// フルバスピスモードに関するデータ
-        /// </summary>
-        [Serializable]
-        public class FullBaspisModeData_
-        {
-            /// <summary>
-            /// フルバスピスモードゲージが秒間で減少する量
-            /// </summary>
-            [SerializeField]
-            private float decreaseAmountPerSeconds;
-
-            /// <summary>
-            /// キャッチした際に加算する量
-            /// </summary>
-            [SerializeField]
-            private float onEnterAmount;
-
-            /// <summary>
-            /// 離れた際に加算する量
-            /// </summary>
-            [SerializeField]
-            private float onExitAmount;
-
-            /// <summary>
-            /// <inheritdoc cref="decreaseAmountPerSeconds"/>
-            /// </summary>
-            public float DecreaseAmountPerSeconds => this.decreaseAmountPerSeconds;
 
             /// <summary>
             /// <inheritdoc cref="onEnterAmount"/>
