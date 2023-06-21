@@ -26,6 +26,8 @@ namespace Unity1Week0619.GameSystems
 
         [SerializeField]
         private Rect spawnArea;
+        
+        private int spawnCount;
 
         private void OnDrawGizmosSelected()
         {
@@ -38,21 +40,15 @@ namespace Unity1Week0619.GameSystems
         {
             UniTask.Void(async _ =>
                 {
-                    var isFullBaspisMode = false;
                     var level = 0;
-
+                    
                     MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
                         .Subscribe(_ =>
                         {
                             level++;
-                            isFullBaspisMode = true;
                         })
                         .AddTo(cancellationToken);
-                    MessageBroker.GetSubscriber<GameEvents.EndFullBaspisMode>()
-                        .Subscribe(_ => isFullBaspisMode = false)
-                        .AddTo(cancellationToken);
 
-                    var spawnCount = 0;
                     while (true)
                     {
                         var delaySeconds = gameDesignData.LevelData.GetSpawnIntervalSeconds(level);
@@ -63,16 +59,18 @@ namespace Unity1Week0619.GameSystems
                         {
                             return;
                         }
-
-                        var position = this.GetSpawnPosition(spawnCount);
-                        var sacabambaspis = Instantiate(GetSacabambaspisControllerPrefab(isFullBaspisMode), position, Quaternion.identity, this.parent);
-                        sacabambaspis.SetupAsync(gameDesignData).Forget();
-                        spawnCount++;
+                        
+                        Spawn(gameDesignData, this.normalSacabambaspisControllerPrefabs);
                     }
                 },
                 cancellationToken);
         }
 
+        public void SpawnColorful(GameDesignData gameDesignData)
+        {
+            this.Spawn(gameDesignData, this.colorfulSacabambaspisControllerPrefabs);
+        }
+        
         /// <summary>
         /// 生成する座標を返す
         /// </summary>
@@ -94,11 +92,18 @@ namespace Unity1Week0619.GameSystems
         /// <summary>
         /// 生成するサカバンバスピスを返す
         /// </summary>
-        private SacabambaspisController GetSacabambaspisControllerPrefab(bool isFullBaspisMode)
+        private SacabambaspisController GetSacabambaspisControllerPrefab(List<SacabambaspisController> prefabs)
         {
-            var list = isFullBaspisMode ? this.colorfulSacabambaspisControllerPrefabs : this.normalSacabambaspisControllerPrefabs;
-            var index = UnityEngine.Random.Range(0, list.Count);
-            return list[index];
+            var index = UnityEngine.Random.Range(0, prefabs.Count);
+            return prefabs[index];
+        }
+        
+        void Spawn(GameDesignData gameDesignData, List<SacabambaspisController> prefabs)
+        {
+            var position = this.GetSpawnPosition(this.spawnCount);
+            var sacabambaspis = Instantiate(GetSacabambaspisControllerPrefab(prefabs), position, Quaternion.identity, this.parent);
+            sacabambaspis.SetupAsync(gameDesignData).Forget();
+            this.spawnCount++;
         }
     }
 }

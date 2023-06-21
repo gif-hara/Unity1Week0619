@@ -153,9 +153,5 @@ MonoBehaviour:
     - 0.3
   baspisGaugeData:
     initialAmount: 0.3
-    onEnterAmount: 0.05
+    onEnterAmount: 0.2
     onExitAmount: 0.04
-  fullBaspisModeData:
-    decreaseAmountPerSeconds: 0.1
-    onEnterAmount: 0.1
-    onExitAmount: 0.08
