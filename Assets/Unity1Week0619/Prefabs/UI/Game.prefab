@@ -170,6 +170,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -217,9 +218,6 @@ MonoBehaviour:
     text: {fileID: 7956731321503622433}
     animationController: {fileID: 22407245390080499}
     showAnimationClip: {fileID: 7400000, guid: 1742a1d68921bb945bf4dd223813057b, type: 2}
-  deadSpeechBalloonArea:
-    speechBalloonRoot: {fileID: 4748025858122362744}
-    speechBalloonControllerPrefab: {fileID: 3649210544817677131, guid: 744e992fb40e8ed468985d8f0814ca30, type: 3}
 --- !u!1 &1790976727242269291
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +252,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -434,7 +432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4825615887174006222
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1032,6 +1030,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7779983817864732414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,6 +1103,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8025421952120275826
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,6 +1371,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8680143377180777479
 GameObject:
   m_ObjectHideFlags: 0
