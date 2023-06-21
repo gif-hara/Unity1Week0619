@@ -41,19 +41,7 @@ namespace Unity1Week0619.UISystems
 
             public Slider Gauge => gauge;
         }
-
-        /// <summary>
-        /// フルバスピスモードのエリア
-        /// </summary>
-        [Serializable]
-        public class FullBaspisModeArea
-        {
-            [SerializeField]
-            private Slider gauge;
-
-            public Slider Gauge => gauge;
-        }
-
+        
         /// <summary>
         /// メッセージを表示するエリア
         /// </summary>
@@ -91,19 +79,14 @@ namespace Unity1Week0619.UISystems
 
         [SerializeField]
         private BaspisGaugeArea baspisGaugeArea;
-
-        [SerializeField]
-        private FullBaspisModeArea fullBaspisModeArea;
-
+        
         [SerializeField]
         private MessageArea messageArea;
 
         public SacabambaspisCountArea SacabambaspisCount => sacabambaspisCountArea;
 
         public BaspisGaugeArea BaspisGauge => baspisGaugeArea;
-
-        public FullBaspisModeArea FullBaspisMode => fullBaspisModeArea;
-
+        
         public MessageArea Message => messageArea;
     }
 }

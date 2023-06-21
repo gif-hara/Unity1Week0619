@@ -12,7 +12,6 @@ namespace Unity1Week0619.UISystems.Presenters
             GameUIView viewPrefab,
             IUniTaskAsyncEnumerable<int> score,
             IUniTaskAsyncEnumerable<float> baspisGauge,
-            IUniTaskAsyncEnumerable<float> fullBaspisModeGauge,
             CancellationToken cancellationToken
             )
         {
@@ -31,12 +30,6 @@ namespace Unity1Week0619.UISystems.Presenters
                 .Subscribe(x =>
                 {
                     view.BaspisGauge.Gauge.value = x;
-                })
-                .AddTo(cancellationToken);
-            fullBaspisModeGauge
-                .Subscribe(x =>
-                {
-                    view.FullBaspisMode.Gauge.value = x;
                 })
                 .AddTo(cancellationToken);
 
