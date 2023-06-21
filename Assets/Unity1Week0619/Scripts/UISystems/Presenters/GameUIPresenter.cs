@@ -12,6 +12,7 @@ namespace Unity1Week0619.UISystems.Presenters
             GameUIView viewPrefab,
             IUniTaskAsyncEnumerable<int> score,
             IUniTaskAsyncEnumerable<float> baspisGauge,
+            IUniTaskAsyncEnumerable<float> gameTimeSeconds,
             CancellationToken cancellationToken
             )
         {
@@ -32,6 +33,12 @@ namespace Unity1Week0619.UISystems.Presenters
                     view.BaspisGauge.Gauge.value = x;
                 })
                 .AddTo(cancellationToken);
+            gameTimeSeconds
+                .Subscribe(x =>
+                {
+                    view.GameTime.Text.text = $"{x:F1}";
+                })
+                .AddTo(cancellationToken);
 
             // ゲーム開始時にメッセージを出す
             MessageBroker.GetAsyncSubscriber<GameEvents.NotifyBeginGame>()
@@ -45,7 +52,7 @@ namespace Unity1Week0619.UISystems.Presenters
             MessageBroker.GetAsyncSubscriber<GameEvents.NotifyEndGame>()
                 .Subscribe(async (_, ct) =>
                 {
-                    await view.Message.ShowAsync("終了！");
+                    await view.Message.ShowAsync("パフェ完成！");
                 })
                 .AddTo(cancellationToken);
         }

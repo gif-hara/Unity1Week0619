@@ -148,10 +148,9 @@ MonoBehaviour:
     spawnIntervalSeconds:
     - 2
     - 1
+    - 0.9
     - 0.8
-    - 0.6
-    - 0.3
+    - 0.7
   baspisGaugeData:
-    initialAmount: 0.3
     onEnterAmount: 0.2
-    onExitAmount: 0.04
+  gameTimeSeconds: 3

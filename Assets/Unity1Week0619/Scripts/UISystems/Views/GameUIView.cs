@@ -74,6 +74,15 @@ namespace Unity1Week0619.UISystems
             }
         }
 
+        [Serializable]
+        public class GameTimeArea
+        {
+            [SerializeField]
+            private TMP_Text text;
+            
+            public TMP_Text Text => text;
+        }
+
         [SerializeField]
         private SacabambaspisCountArea sacabambaspisCountArea;
 
@@ -83,10 +92,15 @@ namespace Unity1Week0619.UISystems
         [SerializeField]
         private MessageArea messageArea;
 
+        [SerializeField]
+        private GameTimeArea gameTimeArea;
+
         public SacabambaspisCountArea SacabambaspisCount => sacabambaspisCountArea;
 
         public BaspisGaugeArea BaspisGauge => baspisGaugeArea;
         
         public MessageArea Message => messageArea;
+        
+        public GameTimeArea GameTime => gameTimeArea;
     }
 }

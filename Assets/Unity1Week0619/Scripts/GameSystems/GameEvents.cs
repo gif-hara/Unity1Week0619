@@ -1,4 +1,5 @@
-﻿using MessagePipe;
+﻿using System.Threading;
+using MessagePipe;
 using UnityEngine;
 
 namespace Unity1Week0619.GameSystems
@@ -50,6 +51,17 @@ namespace Unity1Week0619.GameSystems
         public sealed class NotifyBeginGame : Message<NotifyBeginGame>
         {
         }
+        
+        /// <summary>
+        /// ゲームを開始した際のイベント
+        /// </summary>
+        public sealed class BeginGame : Message<BeginGame, CancellationToken>
+        {
+            /// <summary>
+            /// ゲームのスコープ
+            /// </summary>
+            public CancellationToken GameScopeToken => this.Param1;
+        }
 
         /// <summary>
         /// ゲームが終了するまで待つイベント
@@ -75,6 +87,7 @@ namespace Unity1Week0619.GameSystems
             builder.AddMessageBroker<BeginFullBaspisMode>();
             builder.AddMessageBroker<EndFullBaspisMode>();
             builder.AddMessageBroker<NotifyBeginGame>();
+            builder.AddMessageBroker<BeginGame>();
             builder.AddMessageBroker<TakeUntilEndGame>();
             builder.AddMessageBroker<NotifyEndGame>();
         }

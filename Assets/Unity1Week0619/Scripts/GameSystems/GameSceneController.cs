@@ -2,6 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using Cysharp.Threading.Tasks.Triggers;
 using MessagePipe;
 using Unity1Week0619.UISystems;
 using Unity1Week0619.UISystems.Presenters;
@@ -34,10 +35,12 @@ namespace Unity1Week0619.GameSystems
                 var gameSceneToken = this.GetCancellationTokenOnDestroy();
                 var score = new AsyncReactiveProperty<int>(0);
                 var baspisGauge = new AsyncReactiveProperty<float>(0.0f);
+                var gameTimeSeconds = new AsyncReactiveProperty<float>(this.gameDesignData.GameTimeSeconds);
                 GameUIPresenter.Setup(
                     this.gameUIView,
                     score,
                     baspisGauge,
+                    gameTimeSeconds,
                     gameSceneToken
                     );
 
@@ -76,12 +79,26 @@ namespace Unity1Week0619.GameSystems
                         baspisGauge.Value = 0.0f;
                     })
                     .AddTo(gameSceneToken);
+                
+                // ゲームを開始した際の処理
+                MessageBroker.GetSubscriber<GameEvents.BeginGame>()
+                    .Subscribe(x =>
+                    {
+                        this.GetAsyncUpdateTrigger()
+                            .Subscribe(_ =>
+                            {
+                                gameTimeSeconds.Value -= UnityEngine.Time.deltaTime;
+                            })
+                            .AddTo(x.GameScopeToken);
+                        gameTimeSeconds.Value -= UnityEngine.Time.deltaTime;
+                    })
+                    .AddTo(gameSceneToken);
 
-                // ゲーム終了時の処理
+                // ゲーム終了待ちの処理
                 MessageBroker.GetAsyncSubscriber<GameEvents.TakeUntilEndGame>()
                     .Subscribe(async (_, ct) =>
                     {
-                        await UniTask.Never(ct);
+                        await UniTask.WaitWhile(() => gameTimeSeconds.Value > 0.0f, cancellationToken: ct);
                     })
                     .AddTo(gameSceneToken);
 
@@ -89,7 +106,11 @@ namespace Unity1Week0619.GameSystems
                 await MessageBroker.GetAsyncPublisher<GameEvents.NotifyBeginGame>()
                     .PublishAsync(GameEvents.NotifyBeginGame.Get(), gameSceneToken);
 
+                // ゲームを開始する
                 var inGameTokenSource = new CancellationTokenSource();
+                MessageBroker.GetPublisher<GameEvents.BeginGame>()
+                    .Publish(GameEvents.BeginGame.Get(inGameTokenSource.Token));
+                
                 this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, inGameTokenSource.Token);
 
                 // ゲームが終了するまで待機

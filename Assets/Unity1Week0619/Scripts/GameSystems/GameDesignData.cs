@@ -33,6 +33,14 @@ namespace Unity1Week0619.GameSystems
         private BaspisGaugeData_ baspisGaugeData;
 
         /// <summary>
+        /// ゲームの時間（秒）
+        /// </summary>
+        [SerializeField]
+        private float gameTimeSeconds;
+
+        public float GameTimeSeconds => gameTimeSeconds;
+
+        /// <summary>
         /// <inheritdoc cref="levelData"/>
         /// </summary>
         public LevelData_ LevelData => this.levelData;
@@ -181,37 +189,15 @@ namespace Unity1Week0619.GameSystems
         public class BaspisGaugeData_
         {
             /// <summary>
-            /// ゲージの初期値
-            /// </summary>
-            [SerializeField, Range(0.0f, 1.0f)]
-            private float initialAmount;
-
-            /// <summary>
             /// サカバンバスピスをキャッチした際に加算される量
             /// </summary>
             [SerializeField]
             private float onEnterAmount;
-
-            /// <summary>
-            /// サカバンバスピスが離れた際に加算される量
-            /// </summary>
-            [SerializeField]
-            private float onExitAmount;
-
-            /// <summary>
-            /// <inheritdoc cref="initialAmount"/>
-            /// </summary>
-            public float InitialAmount => this.initialAmount;
-
+            
             /// <summary>
             /// <inheritdoc cref="onEnterAmount"/>
             /// </summary>
             public float OnEnterAmount => this.onEnterAmount;
-
-            /// <summary>
-            /// <inheritdoc cref="onExitAmount"/>
-            /// </summary>
-            public float OnExitAmount => this.onExitAmount;
         }
     }
 }
