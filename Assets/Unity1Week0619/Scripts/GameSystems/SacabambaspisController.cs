@@ -43,7 +43,10 @@ namespace Unity1Week0619.GameSystems
                 MessageBroker.GetSubscriber<GameEvents.NotifyEndGame>()
                     .Subscribe(_ =>
                     {
-                        Destroy(this.gameObject);
+                        if (!this.isEnterPlayer)
+                        {
+                            Destroy(this.gameObject);
+                        }
                     })
                     .AddTo(token);
                 
