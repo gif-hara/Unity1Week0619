@@ -41,7 +41,7 @@ namespace Unity1Week0619.UISystems.Presenters
                 .AddTo(cancellationToken);
 
             // ゲーム開始時にメッセージを出す
-            MessageBroker.GetAsyncSubscriber<GameEvents.BeginGame>()
+            MessageBroker.GetAsyncSubscriber<GameEvents.NotifyBeginGame>()
                 .Subscribe(async (_, ct) =>
                 {
                     await view.Message.ShowAsync("スタート！");
@@ -49,7 +49,7 @@ namespace Unity1Week0619.UISystems.Presenters
                 .AddTo(cancellationToken);
 
             // ゲーム終了時にメッセージを出す
-            MessageBroker.GetAsyncSubscriber<GameEvents.EndGame>()
+            MessageBroker.GetAsyncSubscriber<GameEvents.NotifyEndGame>()
                 .Subscribe(async (_, ct) =>
                 {
                     await view.Message.ShowAsync("終了！");

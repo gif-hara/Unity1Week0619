@@ -45,9 +45,9 @@ namespace Unity1Week0619.GameSystems
         }
 
         /// <summary>
-        /// ゲームが開始された際のイベント
+        /// ゲーム開始を通知する際のイベント
         /// </summary>
-        public sealed class BeginGame : Message<BeginGame>
+        public sealed class NotifyBeginGame : Message<NotifyBeginGame>
         {
         }
 
@@ -59,9 +59,9 @@ namespace Unity1Week0619.GameSystems
         }
 
         /// <summary>
-        /// ゲームが終了した際のイベント
+        /// ゲーム終了を通知する際のイベント
         /// </summary>
-        public sealed class EndGame : Message<EndGame>
+        public sealed class NotifyEndGame : Message<NotifyEndGame>
         {
         }
 
@@ -74,9 +74,9 @@ namespace Unity1Week0619.GameSystems
             builder.AddMessageBroker<OnExitSacabambaspis>();
             builder.AddMessageBroker<BeginFullBaspisMode>();
             builder.AddMessageBroker<EndFullBaspisMode>();
-            builder.AddMessageBroker<BeginGame>();
+            builder.AddMessageBroker<NotifyBeginGame>();
             builder.AddMessageBroker<TakeUntilEndGame>();
-            builder.AddMessageBroker<EndGame>();
+            builder.AddMessageBroker<NotifyEndGame>();
         }
     }
 }

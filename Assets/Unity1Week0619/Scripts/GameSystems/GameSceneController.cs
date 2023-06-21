@@ -112,9 +112,9 @@ namespace Unity1Week0619.GameSystems
                     })
                     .AddTo(gameSceneToken);
 
-                // ゲームを開始する
-                await MessageBroker.GetAsyncPublisher<GameEvents.BeginGame>()
-                    .PublishAsync(GameEvents.BeginGame.Get(), gameSceneToken);
+                // ゲーム開始を通知する
+                await MessageBroker.GetAsyncPublisher<GameEvents.NotifyBeginGame>()
+                    .PublishAsync(GameEvents.NotifyBeginGame.Get(), gameSceneToken);
 
                 var inGameTokenSource = new CancellationTokenSource();
                 this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, inGameTokenSource.Token);
@@ -126,9 +126,9 @@ namespace Unity1Week0619.GameSystems
                 inGameTokenSource.Cancel();
                 inGameTokenSource.Dispose();
 
-                // ゲーム終了
-                await MessageBroker.GetAsyncPublisher<GameEvents.EndGame>()
-                    .PublishAsync(GameEvents.EndGame.Get(), gameSceneToken);
+                // ゲーム終了を通知する
+                await MessageBroker.GetAsyncPublisher<GameEvents.NotifyEndGame>()
+                    .PublishAsync(GameEvents.NotifyEndGame.Get(), gameSceneToken);
             }
             catch (OperationCanceledException)
             {
