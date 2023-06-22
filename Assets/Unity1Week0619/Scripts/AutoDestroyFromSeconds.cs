@@ -11,12 +11,26 @@ namespace Unity1Week0619
     {
         [SerializeField]
         private float delaySeconds;
-        
+
         private async void Start()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(this.delaySeconds));
-            
-            Destroy(this.gameObject);
+            try
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(this.delaySeconds), cancellationToken: this.GetCancellationTokenOnDestroy());
+                if (this.gameObject == null)
+                {
+                    return;
+                }
+                Destroy(this.gameObject);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
         }
     }
 }
