@@ -14,7 +14,7 @@ namespace Unity1Week0619.UISystems.Presenters
             view.GameStartButton.OnClickAsAsyncEnumerable()
                 .Subscribe(_ =>
                 {
-                    SceneManager.LoadScene("SampleScene");
+                    SceneManager.LoadScene("Game");
                 })
                 .AddTo(token);
         }

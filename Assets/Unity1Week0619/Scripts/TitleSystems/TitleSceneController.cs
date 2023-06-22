@@ -10,8 +10,10 @@ namespace Unity1Week0619.TitleSystems
         [SerializeField]
         private TitleUIView titleUIView;
         
-        private void Start()
+        private async void Start()
         {
+            await BootSystem.IsReady;
+            
             var sceneToken = this.GetCancellationTokenOnDestroy();
             TitleUIPresenter.Setup(this.titleUIView, sceneToken);
         }
