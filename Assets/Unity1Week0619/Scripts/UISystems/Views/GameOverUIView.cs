@@ -31,6 +31,12 @@ namespace Unity1Week0619.UISystems
         private RawImage screenShot;
 
         /// <summary>
+        /// コメント
+        /// </summary>
+        [SerializeField]
+        private TMP_Text comment;
+
+        /// <summary>
         /// <inheritdoc cref="scoreText"/>
         /// </summary>
         public TMP_Text ScoreText => scoreText;
@@ -49,5 +55,10 @@ namespace Unity1Week0619.UISystems
         /// <inheritdoc cref="screenShot"/>
         /// </summary>
         public RawImage ScreenShot => screenShot;
+
+        /// <summary>
+        /// <inheritdoc cref="comment"/>
+        /// </summary>
+        public TMP_Text Comment => comment;
     }
 }

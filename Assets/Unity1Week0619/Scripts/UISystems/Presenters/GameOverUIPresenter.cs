@@ -12,6 +12,7 @@ namespace Unity1Week0619.UISystems.Presenters
             GameOverUIView viewPrefab,
             int score,
             Texture2D screenShot,
+            string comment,
             CancellationToken token
             )
         {
@@ -40,6 +41,7 @@ namespace Unity1Week0619.UISystems.Presenters
 
             view.ScoreText.text = $"{score}バスピス！";
             view.ScreenShot.texture = screenShot;
+            view.Comment.text = comment;
         }
     }
 }

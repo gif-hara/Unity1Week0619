@@ -262,4 +262,5 @@ MonoBehaviour:
   debugContext:
     score: 100
     screenShot: {fileID: 2800000, guid: 691b6ef46ac20cc4e8a8f802e6268e8c, type: 3}
+  designData: {fileID: 11400000, guid: f9a772d45ef7dc34e9f076034260b19c, type: 2}
   gameOverUIView: {fileID: 8681615681677723862, guid: e714e841b9bea9340ac6ba20e191b592, type: 3}

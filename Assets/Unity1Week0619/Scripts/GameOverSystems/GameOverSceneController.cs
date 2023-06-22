@@ -11,6 +11,9 @@ namespace Unity1Week0619.GameOverSystems
         private GameOverSceneContext debugContext;
 
         [SerializeField]
+        private GameOverDesignData designData;
+
+        [SerializeField]
         private GameOverUIView gameOverUIView;
 
         private async void Start()
@@ -24,10 +27,12 @@ namespace Unity1Week0619.GameOverSystems
                 Debug.LogWarning("シーンコンテキストがありません。デバッグ用のコンテキストを使用します");
                 context = this.debugContext;
             }
+            var comment = this.designData.GetComment(context.Score);
             GameOverUIPresenter.Setup(
                 this.gameOverUIView,
                 context.Score,
                 context.ScreenShot,
+                comment,
                 sceneToken
                 );
         }
