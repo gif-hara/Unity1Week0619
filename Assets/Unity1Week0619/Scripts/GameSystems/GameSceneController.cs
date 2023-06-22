@@ -33,6 +33,7 @@ namespace Unity1Week0619.GameSystems
 
                 // ゲームシステム初期化
                 var sceneToken = this.GetCancellationTokenOnDestroy();
+                var inGameTokenSource = new CancellationTokenSource();
                 var gameData = new GameData();
                 gameData.gameTimeSeconds.Value = this.gameDesignData.GameTimeSeconds;
                 GameUIPresenter.Setup(
@@ -54,7 +55,7 @@ namespace Unity1Week0619.GameSystems
                                 .Publish(GameEvents.BeginFullBaspisMode.Get());
                         }
                     })
-                    .AddTo(sceneToken);
+                    .AddTo(inGameTokenSource.Token);
 
                 // サカバンバスピスが離れた際の処理
                 MessageBroker.GetSubscriber<GameEvents.OnExitSacabambaspis>()
@@ -66,7 +67,7 @@ namespace Unity1Week0619.GameSystems
                         }
                         gameData.baspisGauge.Value = 0.0f;
                     })
-                    .AddTo(sceneToken);
+                    .AddTo(inGameTokenSource.Token);
                 
                 // フルバスピスモードが開始した際の処理
                 MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
@@ -76,7 +77,7 @@ namespace Unity1Week0619.GameSystems
                         gameData.level.Value++;
                         gameData.baspisGauge.Value = 0.0f;
                     })
-                    .AddTo(sceneToken);
+                    .AddTo(inGameTokenSource.Token);
                 
                 // ゲームを開始した際の処理
                 MessageBroker.GetSubscriber<GameEvents.BeginGame>()
@@ -104,7 +105,6 @@ namespace Unity1Week0619.GameSystems
                     .PublishAsync(GameEvents.NotifyBeginGame.Get(), sceneToken);
 
                 // ゲームを開始する
-                var inGameTokenSource = new CancellationTokenSource();
                 MessageBroker.GetPublisher<GameEvents.BeginGame>()
                     .Publish(GameEvents.BeginGame.Get(inGameTokenSource.Token));
                 
