@@ -68,17 +68,18 @@ namespace Unity1Week0619.GameSystems
                         gameData.baspisGauge.Value = 0.0f;
                     })
                     .AddTo(inGameTokenSource.Token);
-                
+
                 // フルバスピスモードが開始した際の処理
                 MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
-                    .Subscribe(_ =>
+                    .Subscribe(async _ =>
                     {
+                        await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: inGameTokenSource.Token);
                         this.sacabambaspisSpawner.SpawnColorful(this.gameDesignData);
                         gameData.level.Value++;
                         gameData.baspisGauge.Value = 0.0f;
                     })
                     .AddTo(inGameTokenSource.Token);
-                
+
                 // ゲームを開始した際の処理
                 MessageBroker.GetSubscriber<GameEvents.BeginGame>()
                     .Subscribe(x =>
@@ -107,7 +108,7 @@ namespace Unity1Week0619.GameSystems
                 // ゲームを開始する
                 MessageBroker.GetPublisher<GameEvents.BeginGame>()
                     .Publish(GameEvents.BeginGame.Get(inGameTokenSource.Token));
-                
+
                 this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, gameData, inGameTokenSource.Token);
 
                 // ゲームが終了するまで待機
