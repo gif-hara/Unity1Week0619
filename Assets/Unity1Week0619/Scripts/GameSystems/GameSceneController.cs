@@ -34,6 +34,7 @@ namespace Unity1Week0619.GameSystems
                 // ゲームシステム初期化
                 var sceneToken = this.GetCancellationTokenOnDestroy();
                 var gameData = new GameData();
+                gameData.gameTimeSeconds.Value = this.gameDesignData.GameTimeSeconds;
                 GameUIPresenter.Setup(
                     this.gameUIView,
                     gameData,
