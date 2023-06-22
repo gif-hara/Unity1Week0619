@@ -153,4 +153,4 @@ MonoBehaviour:
     - 0.7
   baspisGaugeData:
     onEnterAmount: 0.2
-  gameTimeSeconds: 3
+  gameTimeSeconds: 60

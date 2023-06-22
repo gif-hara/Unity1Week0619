@@ -1141,8 +1141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 630121217}
   normalSacabambaspisControllerPrefabs:
-  - {fileID: 2334210812072815072, guid: 68061c3bab98fa1489e28cff8a323e05, type: 3}
-  - {fileID: 2334210812072815072, guid: 2b0a960610bdf064587d5214f3db336b, type: 3}
+  - {fileID: 3634419115093956834, guid: 47a784b14be414f15b31d0acedf4d638, type: 3}
   colorfulSacabambaspisControllerPrefabs:
   - {fileID: 2334210812072815072, guid: 7c780a78810c1446da007a7a3228e09c, type: 3}
   firstSpawnPoint: {fileID: 1857440208}
