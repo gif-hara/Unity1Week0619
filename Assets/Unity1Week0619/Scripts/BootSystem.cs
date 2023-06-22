@@ -34,6 +34,7 @@ namespace Unity1Week0619
         {
             MessageBroker.Setup(builder =>
             {
+                SceneEvents.RegisterEvents(builder);
                 GameEvents.RegisterEvents(builder);
             });
             return UniTask.CompletedTask;

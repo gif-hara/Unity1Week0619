@@ -1,6 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using MessagePipe;
 using UnityEngine.SceneManagement;
 
 namespace Unity1Week0619.UISystems.Presenters
@@ -15,6 +16,13 @@ namespace Unity1Week0619.UISystems.Presenters
                 .Subscribe(_ =>
                 {
                     SceneManager.LoadScene("Game");
+                })
+                .AddTo(token);
+
+            MessageBroker.GetSubscriber<SceneEvents.BeginLoad>()
+                .Subscribe(_ =>
+                {
+                    UIManager.Close(view);
                 })
                 .AddTo(token);
         }
