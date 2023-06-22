@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Cysharp.Threading.Tasks.Triggers;
 using MessagePipe;
+using Unity1Week0619.GameOverSystems;
 using Unity1Week0619.UISystems;
 using Unity1Week0619.UISystems.Presenters;
 using UnityEngine;
@@ -130,9 +131,18 @@ namespace Unity1Week0619.GameSystems
                 inGameTokenSource.Cancel();
                 inGameTokenSource.Dispose();
 
+                // この段階でスクリーンショットを撮ってTexture2dにする
+                var texture2d = ScreenCapture.CaptureScreenshotAsTexture();
+
+                // ゲームオーバーシーン用にコンテキストを作る
+                var context = new GameOverSceneContext(gameData.score.Value, texture2d);
+                SceneContext.Set(context);
+
                 // ゲーム終了を通知する
                 await MessageBroker.GetAsyncPublisher<GameEvents.NotifyEndGame>()
                     .PublishAsync(GameEvents.NotifyEndGame.Get(), sceneToken);
+
+                SceneManager.LoadScene("GameOver");
             }
             catch (OperationCanceledException)
             {
