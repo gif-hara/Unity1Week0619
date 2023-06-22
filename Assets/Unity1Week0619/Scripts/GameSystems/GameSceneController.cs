@@ -90,7 +90,6 @@ namespace Unity1Week0619.GameSystems
                                 gameTimeSeconds.Value -= UnityEngine.Time.deltaTime;
                             })
                             .AddTo(x.GameScopeToken);
-                        gameTimeSeconds.Value -= UnityEngine.Time.deltaTime;
                     })
                     .AddTo(gameSceneToken);
 
