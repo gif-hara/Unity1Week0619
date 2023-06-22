@@ -16,7 +16,6 @@ namespace Unity1Week0619
         /// </summary>
         public sealed class BeginLoad : Message<BeginLoad>
         {
-            
         }
 
         /// <summary>
@@ -24,9 +23,12 @@ namespace Unity1Week0619
         /// </summary>
         public sealed class EndLoad : Message<EndLoad>
         {
-            
         }
-        
+
+        public sealed class BeginFade : Message<BeginFade>
+        {
+        }
+
         /// <summary>
         /// イベントを登録する
         /// </summary>
@@ -34,6 +36,7 @@ namespace Unity1Week0619
         {
             builder.AddMessageBroker<BeginLoad>();
             builder.AddMessageBroker<EndLoad>();
+            builder.AddMessageBroker<BeginFade>();
         }
     }
 }

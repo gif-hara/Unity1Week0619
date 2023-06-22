@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiParent: {fileID: 4515739447644351767}
   uiCamera: {fileID: 257914151053248111}
+  fadeUIViewPrefab: {fileID: 7670346283827557190, guid: 7360f77fefd2ac2448644784efa6beac, type: 3}
 --- !u!1 &7114234269058657749
 GameObject:
   m_ObjectHideFlags: 0

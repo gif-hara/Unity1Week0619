@@ -1,4 +1,6 @@
 using Cysharp.Threading.Tasks;
+using MessagePipe;
+using Unity1Week0619.UISystems.Views;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -14,6 +16,9 @@ namespace Unity1Week0619.UISystems
         [SerializeField]
         private Camera uiCamera;
 
+        [SerializeField]
+        private FadeUIView fadeUIViewPrefab;
+
         public static UIManager Instance { get; private set; }
 
         public static Camera UICamera => Instance.uiCamera;
@@ -25,6 +30,15 @@ namespace Unity1Week0619.UISystems
             var prefab = await AssetLoader.LoadAsync<GameObject>("Assets/Unity1Week0619/Prefabs/UI/UIManager.prefab");
             Instance = Instantiate(prefab).GetComponent<UIManager>();
             DontDestroyOnLoad(Instance);
+
+            var fadeUIView = Open(Instance.fadeUIViewPrefab);
+            Hidden(fadeUIView);
+            MessageBroker.GetAsyncSubscriber<SceneEvents.BeginFade>()
+                .Subscribe(async (_, ct) =>
+                {
+                    Show(fadeUIView);
+                    await fadeUIView.BeginFadeAsync(ct);
+                });
         }
 
         public static T Open<T>(T uiViewPrefab) where T : UIView
