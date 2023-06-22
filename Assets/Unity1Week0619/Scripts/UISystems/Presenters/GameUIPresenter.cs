@@ -10,16 +10,14 @@ namespace Unity1Week0619.UISystems.Presenters
     {
         public static void Setup(
             GameUIView viewPrefab,
-            IUniTaskAsyncEnumerable<int> score,
-            IUniTaskAsyncEnumerable<float> baspisGauge,
-            IUniTaskAsyncEnumerable<float> gameTimeSeconds,
+            GameData gameData,
             CancellationToken cancellationToken
             )
         {
             var view = UIManager.Open(viewPrefab);
             view.Message.SetActive(false);
 
-            score
+            gameData.score
                 .Subscribe(x =>
                 {
                     // ローカライズは必要になったらする
@@ -27,13 +25,13 @@ namespace Unity1Week0619.UISystems.Presenters
                     view.SacabambaspisCount.AnimationController.Play(view.SacabambaspisCount.UpdateAnimationClip);
                 })
                 .AddTo(cancellationToken);
-            baspisGauge
+            gameData.baspisGauge
                 .Subscribe(x =>
                 {
                     view.BaspisGauge.Gauge.value = x;
                 })
                 .AddTo(cancellationToken);
-            gameTimeSeconds
+            gameData.gameTimeSeconds
                 .Subscribe(x =>
                 {
                     view.GameTime.Text.text = $"{x:F1}";

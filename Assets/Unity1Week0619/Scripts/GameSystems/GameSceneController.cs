@@ -33,14 +33,10 @@ namespace Unity1Week0619.GameSystems
 
                 // ゲームシステム初期化
                 var gameSceneToken = this.GetCancellationTokenOnDestroy();
-                var score = new AsyncReactiveProperty<int>(0);
-                var baspisGauge = new AsyncReactiveProperty<float>(0.0f);
-                var gameTimeSeconds = new AsyncReactiveProperty<float>(this.gameDesignData.GameTimeSeconds);
+                var gameData = new GameData();
                 GameUIPresenter.Setup(
                     this.gameUIView,
-                    score,
-                    baspisGauge,
-                    gameTimeSeconds,
+                    gameData,
                     gameSceneToken
                     );
 
@@ -48,9 +44,9 @@ namespace Unity1Week0619.GameSystems
                 MessageBroker.GetSubscriber<GameEvents.OnEnterSacabambaspis>()
                     .Subscribe(x =>
                     {
-                        score.Value += this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
-                        baspisGauge.Value = Mathf.Clamp01(baspisGauge.Value + this.gameDesignData.BaspisGaugeData.OnEnterAmount);
-                        if (baspisGauge.Value >= 1.0f)
+                        gameData.score.Value += this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                        gameData.baspisGauge.Value = Mathf.Clamp01(gameData.baspisGauge.Value + this.gameDesignData.BaspisGaugeData.OnEnterAmount);
+                        if (gameData.baspisGauge.Value >= 1.0f)
                         {
                             // フルバスピスモード開始
                             MessageBroker.GetPublisher<GameEvents.BeginFullBaspisMode>()
@@ -65,18 +61,19 @@ namespace Unity1Week0619.GameSystems
                     {
                         if (x.IsEnteredPlayer)
                         {
-                            score.Value -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
+                            gameData.score.Value -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
                         }
-                        baspisGauge.Value = 0.0f;
+                        gameData.baspisGauge.Value = 0.0f;
                     })
                     .AddTo(gameSceneToken);
                 
                 // フルバスピスモードが開始した際の処理
                 MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
-                    .Subscribe(x =>
+                    .Subscribe(_ =>
                     {
                         this.sacabambaspisSpawner.SpawnColorful(this.gameDesignData);
-                        baspisGauge.Value = 0.0f;
+                        gameData.level.Value++;
+                        gameData.baspisGauge.Value = 0.0f;
                     })
                     .AddTo(gameSceneToken);
                 
@@ -87,7 +84,7 @@ namespace Unity1Week0619.GameSystems
                         this.GetAsyncUpdateTrigger()
                             .Subscribe(_ =>
                             {
-                                gameTimeSeconds.Value -= UnityEngine.Time.deltaTime;
+                                gameData.gameTimeSeconds.Value -= UnityEngine.Time.deltaTime;
                             })
                             .AddTo(x.GameScopeToken);
                     })
@@ -97,7 +94,7 @@ namespace Unity1Week0619.GameSystems
                 MessageBroker.GetAsyncSubscriber<GameEvents.TakeUntilEndGame>()
                     .Subscribe(async (_, ct) =>
                     {
-                        await UniTask.WaitWhile(() => gameTimeSeconds.Value > 0.0f, cancellationToken: ct);
+                        await UniTask.WaitWhile(() => gameData.gameTimeSeconds.Value > 0.0f, cancellationToken: ct);
                     })
                     .AddTo(gameSceneToken);
 
@@ -110,7 +107,7 @@ namespace Unity1Week0619.GameSystems
                 MessageBroker.GetPublisher<GameEvents.BeginGame>()
                     .Publish(GameEvents.BeginGame.Get(inGameTokenSource.Token));
                 
-                this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, inGameTokenSource.Token);
+                this.sacabambaspisSpawner.BeginSpawn(this.gameDesignData, gameData, inGameTokenSource.Token);
 
                 // ゲームが終了するまで待機
                 await MessageBroker.GetAsyncPublisher<GameEvents.TakeUntilEndGame>()

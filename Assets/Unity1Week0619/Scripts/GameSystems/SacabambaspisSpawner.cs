@@ -36,22 +36,13 @@ namespace Unity1Week0619.GameSystems
             Gizmos.DrawWireCube(center, spawnArea.size);
         }
 
-        public void BeginSpawn(GameDesignData gameDesignData, CancellationToken cancellationToken)
+        public void BeginSpawn(GameDesignData gameDesignData, GameData gameData, CancellationToken cancellationToken)
         {
             UniTask.Void(async _ =>
                 {
-                    var level = 0;
-                    
-                    MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
-                        .Subscribe(_ =>
-                        {
-                            level++;
-                        })
-                        .AddTo(cancellationToken);
-
                     while (true)
                     {
-                        var delaySeconds = gameDesignData.LevelData.GetSpawnIntervalSeconds(level);
+                        var delaySeconds = gameDesignData.LevelData.GetSpawnIntervalSeconds(gameData.level.Value);
                         await UniTask.Delay(TimeSpan.FromSeconds(delaySeconds), cancellationToken: cancellationToken);
 
                         // すでにキャンセルされていたら何もしない
