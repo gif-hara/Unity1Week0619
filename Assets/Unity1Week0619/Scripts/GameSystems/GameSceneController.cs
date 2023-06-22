@@ -73,11 +73,22 @@ namespace Unity1Week0619.GameSystems
                 MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
                     .Subscribe(async _ =>
                     {
-                        await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: inGameTokenSource.Token);
-                        this.sacabambaspisSpawner.SpawnColorful(this.gameDesignData);
-                        gameData.level.Value++;
-                        gameData.baspisGauge.Value = 0.0f;
-                        gameData.isEnterFullBaspisMode = false;
+                        try
+                        {
+                            await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: inGameTokenSource.Token);
+                            this.sacabambaspisSpawner.SpawnColorful(this.gameDesignData);
+                            gameData.level.Value++;
+                            gameData.baspisGauge.Value = 0.0f;
+                            gameData.isEnterFullBaspisMode = false;
+                        }
+                        catch (OperationCanceledException)
+                        {
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                            throw;
+                        }
                     })
                     .AddTo(inGameTokenSource.Token);
 
