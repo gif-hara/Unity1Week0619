@@ -1,4 +1,4 @@
-using UnityEngine.Assertions;
+using UnityEngine;
 
 namespace Unity1Week0619
 {
@@ -14,6 +14,12 @@ namespace Unity1Week0619
         public static void Set(ISceneContext context)
         {
             current = context;
+        }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        public static void Clear()
+        {
+            current = null;
         }
     }
 
