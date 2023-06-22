@@ -66,7 +66,6 @@ namespace Unity1Week0619.GameSystems
                         {
                             gameData.score.Value -= this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
                         }
-                        gameData.baspisGauge.Value = 0.0f;
                     })
                     .AddTo(inGameTokenSource.Token);
 
