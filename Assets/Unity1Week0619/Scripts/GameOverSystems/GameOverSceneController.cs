@@ -9,12 +9,14 @@ namespace Unity1Week0619.GameOverSystems
     {
         [SerializeField]
         private GameOverSceneContext debugContext;
-        
+
         [SerializeField]
         private GameOverUIView gameOverUIView;
-        
-        private void Start()
+
+        private async void Start()
         {
+            await BootSystem.IsReady;
+
             var sceneToken = this.GetCancellationTokenOnDestroy();
             var context = SceneContext.Get<GameOverSceneContext>();
             if (context == null)
