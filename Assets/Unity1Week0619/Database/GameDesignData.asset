@@ -79,7 +79,7 @@ MonoBehaviour:
     spawnAddTorqueMin: -800
     spawnAddTorqueMax: 800
   colorfulSacabambaspisData:
-    score: 2
+    score: 5
     spawnAudioDataList:
     - clip: {fileID: 8300000, guid: b783e2ce98596444e96b79694fc00e1e, type: 3}
       volumeMin: 1
