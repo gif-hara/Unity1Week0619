@@ -760,7 +760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 519420031}
   targetRigidbody2D: {fileID: 970603955}
-  smoothDamp: 2
+  smoothDamp: 4
 --- !u!50 &970603955
 Rigidbody2D:
   serializedVersion: 4
