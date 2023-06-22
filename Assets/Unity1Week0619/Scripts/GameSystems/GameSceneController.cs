@@ -48,9 +48,10 @@ namespace Unity1Week0619.GameSystems
                     {
                         gameData.score.Value += this.gameDesignData.GetSacabambaspisData(x.SacabambaspisType).Score;
                         gameData.baspisGauge.Value = Mathf.Clamp01(gameData.baspisGauge.Value + this.gameDesignData.BaspisGaugeData.OnEnterAmount);
-                        if (gameData.baspisGauge.Value >= 1.0f)
+                        if (gameData.baspisGauge.Value >= 1.0f && !gameData.isEnterFullBaspisMode)
                         {
                             // フルバスピスモード開始
+                            gameData.isEnterFullBaspisMode = true;
                             MessageBroker.GetPublisher<GameEvents.BeginFullBaspisMode>()
                                 .Publish(GameEvents.BeginFullBaspisMode.Get());
                         }
@@ -77,6 +78,7 @@ namespace Unity1Week0619.GameSystems
                         this.sacabambaspisSpawner.SpawnColorful(this.gameDesignData);
                         gameData.level.Value++;
                         gameData.baspisGauge.Value = 0.0f;
+                        gameData.isEnterFullBaspisMode = false;
                     })
                     .AddTo(inGameTokenSource.Token);
 
