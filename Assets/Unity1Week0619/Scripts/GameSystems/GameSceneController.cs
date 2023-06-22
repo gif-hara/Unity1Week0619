@@ -32,12 +32,12 @@ namespace Unity1Week0619.GameSystems
                 await BootSystem.IsReady;
 
                 // ゲームシステム初期化
-                var gameSceneToken = this.GetCancellationTokenOnDestroy();
+                var sceneToken = this.GetCancellationTokenOnDestroy();
                 var gameData = new GameData();
                 GameUIPresenter.Setup(
                     this.gameUIView,
                     gameData,
-                    gameSceneToken
+                    sceneToken
                     );
 
                 // サカバンバスピスがプレイヤーに入った際の処理
@@ -53,7 +53,7 @@ namespace Unity1Week0619.GameSystems
                                 .Publish(GameEvents.BeginFullBaspisMode.Get());
                         }
                     })
-                    .AddTo(gameSceneToken);
+                    .AddTo(sceneToken);
 
                 // サカバンバスピスが離れた際の処理
                 MessageBroker.GetSubscriber<GameEvents.OnExitSacabambaspis>()
@@ -65,7 +65,7 @@ namespace Unity1Week0619.GameSystems
                         }
                         gameData.baspisGauge.Value = 0.0f;
                     })
-                    .AddTo(gameSceneToken);
+                    .AddTo(sceneToken);
                 
                 // フルバスピスモードが開始した際の処理
                 MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
@@ -75,7 +75,7 @@ namespace Unity1Week0619.GameSystems
                         gameData.level.Value++;
                         gameData.baspisGauge.Value = 0.0f;
                     })
-                    .AddTo(gameSceneToken);
+                    .AddTo(sceneToken);
                 
                 // ゲームを開始した際の処理
                 MessageBroker.GetSubscriber<GameEvents.BeginGame>()
@@ -88,7 +88,7 @@ namespace Unity1Week0619.GameSystems
                             })
                             .AddTo(x.GameScopeToken);
                     })
-                    .AddTo(gameSceneToken);
+                    .AddTo(sceneToken);
 
                 // ゲーム終了待ちの処理
                 MessageBroker.GetAsyncSubscriber<GameEvents.TakeUntilEndGame>()
@@ -96,11 +96,11 @@ namespace Unity1Week0619.GameSystems
                     {
                         await UniTask.WaitWhile(() => gameData.gameTimeSeconds.Value > 0.0f, cancellationToken: ct);
                     })
-                    .AddTo(gameSceneToken);
+                    .AddTo(sceneToken);
 
                 // ゲーム開始を通知する
                 await MessageBroker.GetAsyncPublisher<GameEvents.NotifyBeginGame>()
-                    .PublishAsync(GameEvents.NotifyBeginGame.Get(), gameSceneToken);
+                    .PublishAsync(GameEvents.NotifyBeginGame.Get(), sceneToken);
 
                 // ゲームを開始する
                 var inGameTokenSource = new CancellationTokenSource();
@@ -111,14 +111,14 @@ namespace Unity1Week0619.GameSystems
 
                 // ゲームが終了するまで待機
                 await MessageBroker.GetAsyncPublisher<GameEvents.TakeUntilEndGame>()
-                    .PublishAsync(GameEvents.TakeUntilEndGame.Get(), gameSceneToken);
+                    .PublishAsync(GameEvents.TakeUntilEndGame.Get(), sceneToken);
 
                 inGameTokenSource.Cancel();
                 inGameTokenSource.Dispose();
 
                 // ゲーム終了を通知する
                 await MessageBroker.GetAsyncPublisher<GameEvents.NotifyEndGame>()
-                    .PublishAsync(GameEvents.NotifyEndGame.Get(), gameSceneToken);
+                    .PublishAsync(GameEvents.NotifyEndGame.Get(), sceneToken);
             }
             catch (OperationCanceledException)
             {
