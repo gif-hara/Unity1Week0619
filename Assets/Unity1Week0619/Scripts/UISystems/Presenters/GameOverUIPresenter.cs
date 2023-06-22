@@ -2,12 +2,18 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using MessagePipe;
+using UnityEngine;
 
 namespace Unity1Week0619.UISystems.Presenters
 {
     public class GameOverUIPresenter
     {
-        public static void Setup(GameOverUIView viewPrefab, int score, CancellationToken token)
+        public static void Setup(
+            GameOverUIView viewPrefab,
+            int score,
+            Texture2D screenShot,
+            CancellationToken token
+            )
         {
             var view = UIManager.Open(viewPrefab);
 
@@ -33,6 +39,7 @@ namespace Unity1Week0619.UISystems.Presenters
                 .AddTo(token);
 
             view.ScoreText.text = $"{score}バスピス！";
+            view.ScreenShot.texture = screenShot;
         }
     }
 }

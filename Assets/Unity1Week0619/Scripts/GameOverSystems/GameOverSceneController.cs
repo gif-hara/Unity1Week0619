@@ -24,7 +24,12 @@ namespace Unity1Week0619.GameOverSystems
                 Debug.LogWarning("シーンコンテキストがありません。デバッグ用のコンテキストを使用します");
                 context = this.debugContext;
             }
-            GameOverUIPresenter.Setup(this.gameOverUIView, context.Score, sceneToken);
+            GameOverUIPresenter.Setup(
+                this.gameOverUIView,
+                context.Score,
+                context.ScreenShot,
+                sceneToken
+                );
         }
     }
 }
