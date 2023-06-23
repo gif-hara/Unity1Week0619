@@ -114,6 +114,19 @@ namespace Unity1Week0619.GameSystems
                     })
                     .AddTo(sceneToken);
 
+                // デバッグ処理
+#if UNITY_EDITOR || DEBUG
+                this.GetAsyncUpdateTrigger()
+                    .Subscribe(_ =>
+                    {
+                        if(Input.GetKeyDown(KeyCode.F))
+                        {
+                            gameData.gameTimeSeconds.Value = 0.0f;
+                        }
+                    })
+                    .AddTo(sceneToken);
+#endif
+
                 // ゲーム開始を通知する
                 await MessageBroker.GetAsyncPublisher<GameEvents.NotifyBeginGame>()
                     .PublishAsync(GameEvents.NotifyBeginGame.Get(), sceneToken);
