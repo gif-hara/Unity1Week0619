@@ -53,6 +53,14 @@ namespace Unity1Week0619.UISystems.Presenters
                     await view.Message.ShowAsync("パフェ完成！");
                 })
                 .AddTo(cancellationToken);
+
+            // シーン終了したらViewを削除する
+            MessageBroker.GetSubscriber<SceneEvents.BeginLoad>()
+                .Subscribe(_ =>
+                {
+                    UIManager.Close(view);
+                })
+                .AddTo(cancellationToken);
         }
     }
 }
