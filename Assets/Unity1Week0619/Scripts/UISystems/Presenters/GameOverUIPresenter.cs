@@ -2,6 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using MessagePipe;
+using TweetWithScreenShot;
 using UnityEngine;
 
 namespace Unity1Week0619.UISystems.Presenters
@@ -29,6 +30,13 @@ namespace Unity1Week0619.UISystems.Presenters
                 .Subscribe(_ =>
                 {
                     SceneManager.LoadScene("Title");
+                })
+                .AddTo(token);
+
+            view.TweetButton.OnClickAsAsyncEnumerable()
+                .Subscribe(_ =>
+                {
+                    view.StartCoroutine(TweetManager.TweetWithScreenShot($"バスぴすパフェで{score}バスピス獲得したよ！バスピス！"));
                 })
                 .AddTo(token);
 

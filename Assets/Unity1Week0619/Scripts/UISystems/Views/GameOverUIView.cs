@@ -25,6 +25,12 @@ namespace Unity1Week0619.UISystems
         private Button titleButton;
 
         /// <summary>
+        /// ツイートボタン
+        /// </summary>
+        [SerializeField]
+        private Button tweetButton;
+
+        /// <summary>
         /// スクリーンショットを映すイメージ
         /// </summary>
         [SerializeField]
@@ -50,6 +56,11 @@ namespace Unity1Week0619.UISystems
         /// <inheritdoc cref="titleButton"/>
         /// </summary>
         public Button TitleButton => titleButton;
+
+        /// <summary>
+        /// <inheritdoc cref="tweetButton"/>
+        /// </summary>
+        public Button TweetButton => tweetButton;
 
         /// <summary>
         /// <inheritdoc cref="screenShot"/>
