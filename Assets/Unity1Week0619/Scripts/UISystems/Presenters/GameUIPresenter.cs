@@ -38,6 +38,14 @@ namespace Unity1Week0619.UISystems.Presenters
                 })
                 .AddTo(cancellationToken);
 
+            // フルバスピスモードになったらアニメーションする
+            MessageBroker.GetSubscriber<GameEvents.BeginFullBaspisMode>()
+                .Subscribe(_ =>
+                {
+                    view.BaspisGauge.PlayOnEnterFullBaspisModeAnimation();
+                })
+                .AddTo(cancellationToken);
+
             // ゲーム開始時にメッセージを出す
             MessageBroker.GetAsyncSubscriber<GameEvents.NotifyBeginGame>()
                 .Subscribe(async (_, ct) =>

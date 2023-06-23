@@ -39,9 +39,20 @@ namespace Unity1Week0619.UISystems
             [SerializeField]
             private Slider gauge;
 
+            [SerializeField]
+            private AnimationController baspisGaugeAnimationController;
+
+            [SerializeField]
+            private AnimationClip onEnterFullBaspisModeAnimationClip;
+
             public Slider Gauge => gauge;
+
+            public void PlayOnEnterFullBaspisModeAnimation()
+            {
+                this.baspisGaugeAnimationController.Play(this.onEnterFullBaspisModeAnimationClip);
+            }
         }
-        
+
         /// <summary>
         /// メッセージを表示するエリア
         /// </summary>
@@ -79,7 +90,7 @@ namespace Unity1Week0619.UISystems
         {
             [SerializeField]
             private TMP_Text text;
-            
+
             public TMP_Text Text => text;
         }
 
@@ -88,7 +99,7 @@ namespace Unity1Week0619.UISystems
 
         [SerializeField]
         private BaspisGaugeArea baspisGaugeArea;
-        
+
         [SerializeField]
         private MessageArea messageArea;
 
@@ -98,9 +109,9 @@ namespace Unity1Week0619.UISystems
         public SacabambaspisCountArea SacabambaspisCount => sacabambaspisCountArea;
 
         public BaspisGaugeArea BaspisGauge => baspisGaugeArea;
-        
+
         public MessageArea Message => messageArea;
-        
+
         public GameTimeArea GameTime => gameTimeArea;
     }
 }
