@@ -145,7 +145,7 @@ namespace Unity1Week0619.GameSystems
                 inGameTokenSource.Dispose();
 
                 // スクショを撮るために1フレーム待つ
-                await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate, sceneToken);
+                await UniTask.WaitForEndOfFrame(this, sceneToken);
 
                 // スクショを撮る
                 var screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
