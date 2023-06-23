@@ -12,12 +12,17 @@ namespace Unity1Week0619.UISystems
         private Button gameStartButton;
 
         [SerializeField]
+        private Button licenseButton;
+
+        [SerializeField]
         private Animator animator;
 
         /// <summary>
         /// <inheritdoc cref="gameStartButton"/>
         /// </summary>
         public Button GameStartButton => gameStartButton;
+
+        public Button LicenseButton => licenseButton;
 
         public Animator Animator => animator;
     }

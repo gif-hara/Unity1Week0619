@@ -6,25 +6,16 @@ using UnityEngine.SceneManagement;
 
 namespace Unity1Week0619.UISystems.Presenters
 {
-    public class TitleUIPresenter
+    public class LicenseUIPresenter
     {
-        public static void Setup(TitleUIView viewPrefab, CancellationToken token)
+        public static void Setup(LicenseUIView viewPrefab, CancellationToken token)
         {
             var view = UIManager.Open(viewPrefab);
 
-            view.Animator.Update(0.0f);
-
-            view.GameStartButton.OnClickAsAsyncEnumerable()
+            view.TitleButton.OnClickAsAsyncEnumerable()
                 .Subscribe(_ =>
                 {
-                    SceneManager.LoadScene("Game");
-                })
-                .AddTo(token);
-
-            view.LicenseButton.OnClickAsAsyncEnumerable()
-                .Subscribe(_ =>
-                {
-                    SceneManager.LoadScene("License");
+                    SceneManager.LoadScene("Title");
                 })
                 .AddTo(token);
 
