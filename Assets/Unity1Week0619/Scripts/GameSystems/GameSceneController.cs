@@ -144,11 +144,16 @@ namespace Unity1Week0619.GameSystems
                 inGameTokenSource.Cancel();
                 inGameTokenSource.Dispose();
 
-                // この段階でスクリーンショットを撮ってTexture2dにする
-                var texture2d = ScreenCapture.CaptureScreenshotAsTexture();
+                // スクショを撮るために1フレーム待つ
+                await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate, sceneToken);
+
+                // スクショを撮る
+                var screenShot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+                screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+                screenShot.Apply();
 
                 // ゲームオーバーシーン用にコンテキストを作る
-                var context = new GameOverSceneContext(gameData.score.Value, texture2d);
+                var context = new GameOverSceneContext(gameData.score.Value, screenShot);
                 SceneContext.Set(context);
 
                 // ゲーム終了を通知する
