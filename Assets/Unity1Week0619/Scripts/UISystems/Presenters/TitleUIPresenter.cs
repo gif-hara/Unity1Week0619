@@ -12,6 +12,8 @@ namespace Unity1Week0619.UISystems.Presenters
         {
             var view = UIManager.Open(viewPrefab);
 
+            view.Animator.Update(0.0f);
+
             view.GameStartButton.OnClickAsAsyncEnumerable()
                 .Subscribe(_ =>
                 {
