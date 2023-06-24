@@ -153,4 +153,10 @@ MonoBehaviour:
     - 0.7
   baspisGaugeData:
     onEnterAmount: 0.2
+    fullBaspisModeClip:
+      clip: {fileID: 8300000, guid: 2f2a09f050d29b441979b0c0b82e0525, type: 3}
+      volumeMin: 1
+      volumeMax: 1
+      pitchMin: 1
+      pitchMax: 1
   gameTimeSeconds: 60

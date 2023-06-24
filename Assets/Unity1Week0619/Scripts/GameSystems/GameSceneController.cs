@@ -124,6 +124,10 @@ namespace Unity1Week0619.GameSystems
                         {
                             gameData.gameTimeSeconds.Value = 0.0f;
                         }
+                        if(Input.GetKeyDown(KeyCode.G))
+                        {
+                            gameData.baspisGauge.Value = 1.0f;
+                        }
                     })
                     .AddTo(sceneToken);
 #endif
