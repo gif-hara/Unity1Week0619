@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
         Instance.fadeStream?.Dispose();
         Instance.bgmSource.clip = clip;
         Instance.bgmSource.loop = true;
-        Instance.bgmSource.volume = 0.3f;
+        Instance.bgmSource.volume = 0.15f;
         Instance.bgmSource.Play();
     }
 
