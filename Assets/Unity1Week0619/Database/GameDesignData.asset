@@ -73,6 +73,13 @@ MonoBehaviour:
         pitchMin: 1
         pitchMax: 2
       serif: "\u3046\u308F\u30FC\uFF01"
+    - audioData:
+        clip: {fileID: 8300000, guid: 2255bca3351a8ca4fa1e4a313fcf3744, type: 3}
+        volumeMin: 1
+        volumeMax: 1
+        pitchMin: 1
+        pitchMax: 2
+      serif: "\u4E0B\u624B\u304F\u305D\u30FC\uFF01"
     spawnDelaySeconds: 0.5
     spawnVelocityMin: {x: -50, y: 50}
     spawnVelocityMax: {x: 50, y: 100}
@@ -139,6 +146,13 @@ MonoBehaviour:
         pitchMin: 1
         pitchMax: 2
       serif: "\u3046\u308F\u30FC\uFF01"
+    - audioData:
+        clip: {fileID: 8300000, guid: 2255bca3351a8ca4fa1e4a313fcf3744, type: 3}
+        volumeMin: 1
+        volumeMax: 1
+        pitchMin: 1
+        pitchMax: 2
+      serif: "\u4E0B\u624B\u304F\u305D\u30FC\uFF01"
     spawnDelaySeconds: 0.5
     spawnVelocityMin: {x: -50, y: 100}
     spawnVelocityMax: {x: 50, y: 200}
