@@ -18,6 +18,7 @@ namespace Unity1Week0619.UISystems.Presenters
                 .Subscribe(_ =>
                 {
                     SceneManager.LoadScene("Game");
+                    AudioManager.FadeBGM(0.5f, 0.0f);
                 })
                 .AddTo(token);
 

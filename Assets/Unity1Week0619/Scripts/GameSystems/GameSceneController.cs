@@ -42,6 +42,7 @@ namespace Unity1Week0619.GameSystems
                     gameData,
                     sceneToken
                     );
+                AudioManager.PlayBGM(this.gameDesignData.BGM);
 
                 // サカバンバスピスがプレイヤーに入った際の処理
                 MessageBroker.GetSubscriber<GameEvents.OnEnterSacabambaspis>()
@@ -165,6 +166,7 @@ namespace Unity1Week0619.GameSystems
                 await MessageBroker.GetAsyncPublisher<GameEvents.NotifyEndGame>()
                     .PublishAsync(GameEvents.NotifyEndGame.Get(), sceneToken);
 
+                AudioManager.FadeBGM(0.5f, 0.0f);
                 SceneManager.LoadScene("GameOver");
             }
             catch (OperationCanceledException)

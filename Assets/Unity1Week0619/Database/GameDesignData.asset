@@ -174,3 +174,4 @@ MonoBehaviour:
       pitchMin: 1
       pitchMax: 1
   gameTimeSeconds: 60
+  bgm: {fileID: 8300000, guid: 93ee63c0e5cd776419aefd5a95af89a8, type: 3}

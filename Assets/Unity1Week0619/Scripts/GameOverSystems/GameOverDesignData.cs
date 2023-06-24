@@ -34,6 +34,11 @@ namespace Unity1Week0619.GameOverSystems
         [SerializeField]
         private List<CommentData> commentDataList;
 
+        [SerializeField]
+        private AudioClip bgm;
+
+        public AudioClip BGM => bgm;
+
         public string GetComment(int score)
         {
             foreach (var commentData in this.commentDataList)

@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleUIView: {fileID: 750192759525414165, guid: f4adb682c16994e629bc8b91fb80fdfe, type: 3}
+  bgm: {fileID: 8300000, guid: 58b5d85eddeeed74bbe0f23ebb358c94, type: 3}
 --- !u!4 &233471028
 Transform:
   m_ObjectHideFlags: 0

@@ -31,3 +31,4 @@ MonoBehaviour:
   - scoreMin: 71
     scoreMax: 9999
     comment: "\u3059\u3054\u3059\u304E\u308B"
+  bgm: {fileID: 8300000, guid: 60e3f4707cfe172498325f463d09feef, type: 3}

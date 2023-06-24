@@ -20,6 +20,7 @@ namespace Unity1Week0619.GameOverSystems
         {
             await BootSystem.IsReady;
 
+            AudioManager.PlayBGM(this.designData.BGM);
             var sceneToken = this.GetCancellationTokenOnDestroy();
             var context = SceneContext.Get<GameOverSceneContext>();
             if (context == null)

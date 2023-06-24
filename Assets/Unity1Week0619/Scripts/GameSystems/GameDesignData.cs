@@ -38,7 +38,12 @@ namespace Unity1Week0619.GameSystems
         [SerializeField]
         private float gameTimeSeconds;
 
+        [SerializeField]
+        private AudioClip bgm;
+
         public float GameTimeSeconds => gameTimeSeconds;
+
+        public AudioClip BGM => bgm;
 
         /// <summary>
         /// <inheritdoc cref="levelData"/>

@@ -22,6 +22,7 @@ namespace Unity1Week0619.UISystems.Presenters
             view.RetryButton.OnClickAsAsyncEnumerable()
                 .Subscribe(_ =>
                 {
+                    AudioManager.FadeBGM(0.5f, 0.0f);
                     SceneManager.LoadScene("Game");
                 })
                 .AddTo(token);
@@ -29,6 +30,7 @@ namespace Unity1Week0619.UISystems.Presenters
             view.TitleButton.OnClickAsAsyncEnumerable()
                 .Subscribe(_ =>
                 {
+                    AudioManager.FadeBGM(0.5f, 0.0f);
                     SceneManager.LoadScene("Title");
                 })
                 .AddTo(token);
