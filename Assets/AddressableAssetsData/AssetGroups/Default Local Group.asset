@@ -16,17 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 12952f977c17c9243b0ccaa951bb04f8
-  m_SerializeEntries:
-  - m_GUID: 23702009fc1f49b44bb9b1fa37e3de6c
-    m_Address: Assets/Unity1Week0619/Prefabs/UI/UIManager.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 019de83317e97584bbb6ffe642571bba
-    m_Address: Assets/Unity1Week0619/Prefabs/AudioManager.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2b7694211806e8e4fa1879786f3b3e27, type: 2}
   m_SchemaSet:

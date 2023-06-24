@@ -33,8 +33,8 @@ public class AudioManager : MonoBehaviour
     {
         Assert.IsNull(Instance);
 
-        var prefab = await AssetLoader.LoadAsync<GameObject>("Assets/Unity1Week0619/Prefabs/AudioManager.prefab");
-        Instance = Instantiate(prefab).GetComponent<AudioManager>();
+        var prefab = await Resources.LoadAsync<AudioManager>("AudioManager");
+        Instance = Instantiate((AudioManager)prefab);
         DontDestroyOnLoad(Instance);
     }
 

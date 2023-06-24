@@ -27,8 +27,8 @@ namespace Unity1Week0619.UISystems
         {
             Assert.IsNull(Instance);
 
-            var prefab = await AssetLoader.LoadAsync<GameObject>("Assets/Unity1Week0619/Prefabs/UI/UIManager.prefab");
-            Instance = Instantiate(prefab).GetComponent<UIManager>();
+            var prefab = await Resources.LoadAsync<UIManager>("UIManager");
+            Instance = Instantiate((UIManager)prefab);
             DontDestroyOnLoad(Instance);
 
             var fadeUIView = Open(Instance.fadeUIViewPrefab);
