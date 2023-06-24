@@ -76,6 +76,7 @@ namespace Unity1Week0619.GameSystems
                     {
                         try
                         {
+                            AudioManager.PlaySE(this.gameDesignData.BaspisGaugeData.FullBaspisModeClip);
                             await UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: inGameTokenSource.Token);
                             this.sacabambaspisSpawner.SpawnColorful(this.gameDesignData);
                             gameData.level.Value++;

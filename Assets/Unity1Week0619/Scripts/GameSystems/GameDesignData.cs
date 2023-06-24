@@ -49,7 +49,7 @@ namespace Unity1Week0619.GameSystems
         /// <inheritdoc cref="baspisGaugeData"/>
         /// </summary>
         public BaspisGaugeData_ BaspisGaugeData => this.baspisGaugeData;
-        
+
         /// <summary>
         /// <paramref name="sacabambaspisType"/>から<see cref="SacabambaspisData_"/>を返す
         /// </summary>
@@ -193,11 +193,22 @@ namespace Unity1Week0619.GameSystems
             /// </summary>
             [SerializeField]
             private float onEnterAmount;
-            
+
+            /// <summary>
+            /// フルバスピスになった際に再生されるサウンド
+            /// </summary>
+            [SerializeField]
+            private SoundEffectElement.AudioData fullBaspisModeClip;
+
             /// <summary>
             /// <inheritdoc cref="onEnterAmount"/>
             /// </summary>
             public float OnEnterAmount => this.onEnterAmount;
+
+            /// <summary>
+            /// <inheritdoc cref="fullBaspisModeClip"/>
+            /// </summary>
+            public SoundEffectElement.AudioData FullBaspisModeClip => this.fullBaspisModeClip;
         }
     }
 }
