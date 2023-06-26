@@ -38,7 +38,7 @@ namespace Unity1Week0619.UISystems.Presenters
             view.TweetButton.OnClickAsAsyncEnumerable()
                 .Subscribe(_ =>
                 {
-                    view.StartCoroutine(TweetManager.TweetWithScreenShot($"バスピスパフェで{score}バスピス獲得したよ！バスピス！"));
+                    view.StartCoroutine(TweetManager.TweetWithScreenShot($"バスピスパフェで{score}バスピス獲得したよ！バスピス！みんなもプレイしてね！ https://unityroom.com/games/baspis-parfait"));
                 })
                 .AddTo(token);
 
